@@ -71,16 +71,16 @@ def map(request):
 def clubs(request, club_name_slug): #yet to add sorting options?
     context_dict = {}
     try:
-        club = Clubs.objects.order_by('name')
+        club = Club.objects.order_by('name')
         context_dict['club'] = club
-    except Clubs.DoesNotExist:
+    except Club.DoesNotExist:
         context_dict['club'] = None
     return render(request, 'ClubScoutGlasgow/clubs.html', context=context_dict) #note clubs.html for whole list template, not club.html for individual
 
 def show_club(request, club_name_slug):
     context_dict={}
     try:
-        club  = club.objects.get(slug = club_name_slug)
+        club  = Club.objects.get(slug = club_name_slug)
         context_dict['club'] = club
 
     except Club.DoesNotExist:
