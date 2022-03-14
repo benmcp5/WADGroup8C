@@ -1,0 +1,27 @@
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+  Register
+{% endblock %}
+
+{% block body_block %}
+  <h1>Register for Rango</h1>
+
+    <strong>Register here!</strong><br />
+    {% if registered %}
+    <strong>Thank you for registering!</strong>
+    <a href="{% url 'ClubScoutGlasgow:login' %}">Log in here</a>
+    <br/>
+    {% else %}
+    <form id="user_form" method="post" action="{% url 'ClubScoutGlasgow:register' %}"
+     enctype="multipart/form-data">
+     {% csrf_token %}
+    <!-- Display each form -->
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+      <!-- Provide a button to click to submit the form. -->
+      <input type="submit" name="submit" value="Register" />
+    </form>
+  {% endif %}
+{% endblock %}

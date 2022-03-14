@@ -1,0 +1,37 @@
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load staticfiles %}
+{% load ClubScoutGlasgow_template_tags %}
+
+{% block title_block %}
+  Home
+
+{% endblock %}
+
+{% block body_block %}
+
+  <strong> HOME </strong>
+  <a href="{% url 'ClubScoutGlasgow:login' %}">Login/register</a>
+
+
+    {% if user.is_authenticated %}
+        howdy {{ user.username }}!
+    {% else %}
+          hey there partner!
+    {% endif %}
+
+    {% if clubs %}
+      {% for club in clubs %}
+        {% if club == current_club %}
+        <li>
+        <!-- The following line is changed to add an HTML hyperlink -->
+
+        {{ club.name }}
+
+        {{ club.openingHours }}
+        </li>
+        {% endif %}
+        {% endfor %}
+    {% else %}
+        <strong>No clubs</strong>
+    {% endif %}
+{% endblock %}

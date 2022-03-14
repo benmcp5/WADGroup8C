@@ -1,0 +1,21 @@
+<!DOCTYPEhtml>
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+  {% if club %}
+    {{ club.name }}
+  {% else %}
+    Unknown Category
+  {% endif %}
+{% endblock %}
+
+{% block body_block %}
+{% if club %}
+  <h1>{{ club.name }}</h1>
+  
+
+{% else %}
+  The specified club does not exist.
+{% endif %}
+{% endblock %}
