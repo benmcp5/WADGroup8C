@@ -5,21 +5,61 @@
 
 <html>
   <head lang="en">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <title>
-      Rango -
-      </title>
+        ClubScoutGlasgow - {% block title_block %}Home{% endblock %}
+    </title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css" rel="stylesheet">
+    </head>
 
-  </head>
-    {% block title_block %}
-      Club Scout Glasgow
-    {% endblock %}
-
-  <body>
-    <div>
-      {% block body_block %}
-      {% endblock %}
-    </div>
+   <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
+                <a class="navbar-brand p-2" href="{% url 'ClubScoutGlasgow:home' %}">ClubScoutGlasgow</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:home' %}">Home</a></li>
+                        <li class="nav-item "><a class="nav-link" href="{% url 'ClubScoutGlasgow:about' %}">About</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:add_club' %}">Add Club</a></li>
+                        
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:signup' %}">Register Here</a></li>
+                        <li class="nav-item "><a class="nav-link" href="{% url 'ClubScoutGlasgow:login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                    {% block sidebar_block %}
+                        <!--  get_category_list category  -->
+                    {% endblock %}
+                    </div>
+                </nav>
+                
+                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">		
+				<div>
+                    {% block body_block %}{% endblock %}
+				</div>
     <div>
 
     </div>
