@@ -1,10 +1,14 @@
 import os
 
+import django
+
+# from ClubScoutGlasgow.models import Club, Review
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WADGroup8C.settings')
 
 # NOT OPERATIONAL
 
-import django
-
 django.setup()
-# from ClubScoutGlasgow.models import Category, Page
+
+
+def populate():
