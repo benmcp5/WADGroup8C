@@ -1,5 +1,5 @@
 from django import template
-
+from ClubScoutGlasgow.models import Club
 register=template.Library()
 
 @register.inclusion_tag('ClubScoutGlasgow/clubs.html')

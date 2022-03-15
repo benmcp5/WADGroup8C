@@ -27,7 +27,7 @@ def user_login(request): #copied from twd, maybe not compatible?
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('ClubScoutGlasgow:index'))
+                return redirect(reverse('ClubScoutGlasgow:home'))
             else:
                 return HttpResponse("Your account is disabled.")
         else:

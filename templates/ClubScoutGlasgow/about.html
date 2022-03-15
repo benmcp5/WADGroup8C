@@ -1,0 +1,20 @@
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    About Rango
+{% endblock %}
+
+{% block body_block %}
+    <h1>Rango says...</h1>
+    <div>
+        This is the about page! <br />
+        <strong>{{ boldmessage }}</strong><br />
+    </div>
+    <div>
+        Visits: {{ visits }}
+        <a href="/">Home page</a><br />
+        <img src="{% static 'images/feelspriman.png' %}" alt="png of sadness" />
+        <img src="{{ MEDIA_URL }}channing-tatum-1.jpg" alt="no internet = no picture of a cat"/>
+    </div>
+{% endblock %}
