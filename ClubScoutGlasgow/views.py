@@ -10,12 +10,13 @@ from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm
 def home(request):
         context_dict = {}
         clubs = Club.objects.order_by('-name')[:5] #to be replaced
-        context_dict['clubs'] = clubs
+        #context_dict['clubs'] = clubs
+
         return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
-    
+
 def about(request):
     return render(request, 'ClubScoutGlasgow/about.html')
-    
+
 def user_login(request): #copied from twd, maybe not compatible?
     if request.method == 'POST':
 
@@ -35,35 +36,37 @@ def user_login(request): #copied from twd, maybe not compatible?
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request,'ClubScoutGlasgow/login.html')
-        
+
 def user_signup(request): #copied from twd
     registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        
+
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            
+
             user.set_password(user.password)
             user.save()
-            
+
             profile = profile_form.save(commit=False)
             profile.user = user
-            
+
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-                
+
             profile.save()
-            
+
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
-    return render(request, 'ClubScoutGlasgow/register.html', context = {'user_form': user_form,'profile_form': profile_form, 'registered': registered})
+
+    context_dict = {'user_form': user_form,'profile_form': profile_form, 'registered': registered}
+
+    return render(request, 'ClubScoutGlasgow/signup.html', context = context_dict )
 
 def map(request):
     return render(request, 'ClubScoutGlasgow/map.html')
@@ -106,7 +109,7 @@ def write_review(request, club_name_slug): #no ReviewForm yet
         club = None
     if club == None:
         return redirect('ClubScoutGlasgow/')
-    
+
     form = ReviewForm()
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -141,5 +144,3 @@ def add_club(request):
         print(form.errors)
         # Will handle the bad form, new form, or no form supplied cases. # Render the form with error messages (if any).
     return render(request, 'ClubScoutGlasgow/add_club.html', {'form': form})
-
-

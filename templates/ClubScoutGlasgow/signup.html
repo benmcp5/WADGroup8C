@@ -14,7 +14,7 @@
     <a href="{% url 'ClubScoutGlasgow:login' %}">Log in here</a>
     <br/>
     {% else %}
-    <form id="user_form" method="post" action="{% url 'ClubScoutGlasgow:register' %}"
+    <form id="user_form" method="post" action="{% url 'ClubScoutGlasgow:signup' %}"
      enctype="multipart/form-data">
      {% csrf_token %}
     <!-- Display each form -->
