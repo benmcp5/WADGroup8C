@@ -8,14 +8,19 @@
 
 {% block body_block %}
 
-  <strong> HOME </strong>
-  <a href="{% url 'ClubScoutGlasgow:login' %}">Login/register</a>
+  <h1> Home </h1>
+  
 
 
     {% if user.is_authenticated %}
-        howdy {{ user.username }}!
+	<div>
+        Howdy {{ user.username }}!
+	</div>
     {% else %}
-          hey there partner!
+	<div>
+          Hey there partner!
+	</div>
+		  <a href="{% url 'ClubScoutGlasgow:login' %}">Login/register</a>
     {% endif %}
 
     {% if clubs %}
@@ -33,4 +38,7 @@
     {% else %}
         <strong>No clubs</strong>
     {% endif %}
+	<div>
+	<img src="{% static 'images/temporary_Hive_Maps_Screenshot.png' %}" alt="Screenshot of Hive on Gmaps" />
+	</div>
 {% endblock %}

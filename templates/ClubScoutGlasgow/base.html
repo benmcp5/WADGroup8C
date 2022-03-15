@@ -10,7 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+	<link rel="icon" type="image/png" href="{% static 'images/myIcon.png' %}" />
+	
+	
     <title>
         ClubScoutGlasgow - {% block title_block %}Home{% endblock %}
     </title>
@@ -36,6 +38,7 @@
                         <li class="nav-item "><a class="nav-link" href="{% url 'ClubScoutGlasgow:about' %}">About</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:add_club' %}">Add Club</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:logout' %}">Logout</a></li>
                         
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'ClubScoutGlasgow:signup' %}">Register Here</a></li>
@@ -71,7 +74,7 @@
 				<!-- FOOTER -->
                     <footer>
                         <p class="float-right"><a href="#">Back to top</a></p>
-                        <p>&copy; 2020 Tango With Django 2 &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+                        <p>&copy; 2022 ClubScoutGlasgow &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
                     </footer>
                 </main>
 
@@ -86,7 +89,7 @@
         {% if user.is_staff %}
           <a href = "{% url 'ClubScoutGlasgow:add_club' %}"> Add Club </a><br>
           <a href="{% url 'ClubScoutGlasgow:home' %}">Home</a>
-          <strong> STAFF </staff>
+          <strong> STAFF </strong>
         {% endif %}
         AUTHENTICATED!
 
