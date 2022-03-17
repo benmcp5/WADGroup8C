@@ -1,4 +1,5 @@
 {% extends 'ClubScoutGlasgow/base.html' %}
+
 {% load staticfiles %}
 
 {% block title_block %}
@@ -9,7 +10,7 @@
 {% block body_block %}
 
   <h1> Home </h1>
-  
+
 
 
     {% if user.is_authenticated %}
@@ -24,17 +25,18 @@
     {% endif %}
 
     {% if clubs %}
+      <ul>
       {% for club in clubs %}
-        {% if club == current_club %}
-        <li>
-        <!-- The following line is changed to add an HTML hyperlink -->
+        <li> {{ club.name }}</li>
+        <li> {{ club.location }}</li>
 
-        {{ club.name }}
+        {% for image in images %}
 
-        {{ club.openingHours }}
-        </li>
-        {% endif %}
+        <img src= '{% static image.url %}' alt="ERROR" />
         {% endfor %}
+
+      {% endfor %}
+      </ul>
     {% else %}
         <strong>No clubs</strong>
     {% endif %}

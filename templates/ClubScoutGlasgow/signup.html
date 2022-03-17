@@ -2,13 +2,12 @@
 {% load staticfiles %}
 
 {% block title_block %}
-  Register
+  Sign Up
 {% endblock %}
 
 {% block body_block %}
-  <h1>Register for ClubScoutGlasgow</h1>
+  <h1>Sign Up </h1>
 
-    <strong>Register here!</strong><br />
     {% if registered %}
     <strong>Thank you for registering!</strong>
     <a href="{% url 'ClubScoutGlasgow:login' %}">Log in here</a>

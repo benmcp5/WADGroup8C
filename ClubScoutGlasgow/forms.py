@@ -10,7 +10,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password','is_staff')
+        fields = ('username', 'email', 'password',)
 
 class UserProfileForm(forms.ModelForm):
      class Meta:
@@ -29,8 +29,6 @@ class ClubForm(forms.ModelForm):
     website = forms.URLField(help_text="Website")
     instagram = forms.URLField(help_text="Instagram")
     facebook = forms.URLField(help_text="Facebook")
-
-
     about = forms.CharField(required=False,widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}),help_text="About this club" )
 
     def cleanF(self):

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ class UserProfile(models.Model):
 
 
     email = models.EmailField()
-    age = models.IntegerField(default = 18)
+    age = models.PositiveIntegerField(default = 18)
 
 
 
@@ -21,15 +22,15 @@ class UserProfile(models.Model):
 
 class Club(models.Model):
     name = models.CharField(max_length=30, unique = True)
-    entryPrice = models.IntegerField(default=0)
+    entryPrice = models.PositiveIntegerField(default=0)
     location = models.CharField(max_length=100)
-    noOfRooms = models.IntegerField(default=0)
+    noOfRooms = models.PositiveIntegerField(default=1)
     openingHours = models.CharField(max_length=500)
     averageOverallRating = models.FloatField(default = 0)
-    website = models.URLField()
-    instagram = models.URLField()
-    facebook = models.URLField()
-    about = models.CharField(max_length = 500, default = "")
+    instagram = models.URLField(default = "https://www.instagram.com")
+    facebook = models.URLField(default = "https://www.facebook.com")
+    website = models.URLField(default = "https://www.")
+    about = models.TextField(max_length = 500, default = "")
 
     slug = models.SlugField(unique = True, default ="")
 
@@ -40,6 +41,13 @@ class Club(models.Model):
 
     def __str__(self):
         return self.name
+
+class ClubImage(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name = 'images')
+    image = models.ImageField(upload_to= 'static/images/ClubImages/')
+    imageName = image.upload_to.split('/')
+    imageName = imageName[3]
+    url = models.CharField(max_length=500, default = 'images/ClubImages/'+ str(imageName) )
 
 
 class Review(models.Model):

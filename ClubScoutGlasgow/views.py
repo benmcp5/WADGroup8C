@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm
 # Create your views here.
@@ -10,7 +11,12 @@ from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm
 def home(request):
         context_dict = {}
         clubs = Club.objects.order_by('-name')[:5] #to be replaced
-        #context_dict['clubs'] = clubs
+        hive = Club.objects.get(name = 'Hive')
+        image_list = hive.images.all()
+
+        context_dict['clubs'] = clubs
+        context_dict['images'] = image_list
+
 
         return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
 
@@ -33,7 +39,8 @@ def user_login(request): #copied from twd, maybe not compatible?
                 return HttpResponse("Your account is disabled.")
         else:
             print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            messages.ERROR: (request, "Invalid Login Details")
+            return redirect(reverse('ClubScoutGlasgow:login') )
     else:
         return render(request,'ClubScoutGlasgow/login.html')
 
