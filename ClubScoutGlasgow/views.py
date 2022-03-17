@@ -10,13 +10,13 @@ from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm
 
 def home(request):
         context_dict = {}
-        clubs = Club.objects.order_by('-name')[:5] #to be replaced
+        clubs = Club.objects.order_by('-averageOverallRating')[:5] #to be replaced
+        context_dict['clubs'] = clubs
+
+        #MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
         hive = Club.objects.get(name = 'Hive')
         image_list = hive.images.all()
-
-        context_dict['clubs'] = clubs
         context_dict['images'] = image_list
-
 
         return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
 
@@ -108,6 +108,7 @@ def user_logout(request):
 def club_request(request):
     return render(request, 'ClubScoutGlasgow/club_request.html')
 
+@login_required
 def write_review(request, club_name_slug): #no ReviewForm yet
     context_dict = {}
     try:
@@ -142,7 +143,6 @@ def add_club(request):
             # Save the new category to the database.
             form.save(commit=True)
 
-            print("-BCBCVJBCVJC")
             # Now that the category is saved, we could confirm this. # For now, just redirect the user back to the index view.
             return redirect('/ClubScoutGlasgow/')
     else:

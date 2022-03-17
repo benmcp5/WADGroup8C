@@ -11,29 +11,26 @@
 
   <h1> Home </h1>
 
-
-
     {% if user.is_authenticated %}
 	<div>
         Howdy {{ user.username }}!
 	</div>
     {% else %}
 	<div>
-          Hey there partner!
+        Hey there partner!
 	</div>
 		  <a href="{% url 'ClubScoutGlasgow:login' %}">Login/register</a>
     {% endif %}
-
+    {% if images %}
+      {% for image in images %}
+        <img src= '{% static image.url %}' alt="ERROR" />
+      {% endfor %}
+    {% endif %}
     {% if clubs %}
       <ul>
       {% for club in clubs %}
         <li> {{ club.name }}</li>
         <li> {{ club.location }}</li>
-
-        {% for image in images %}
-
-        <img src= '{% static image.url %}' alt="ERROR" />
-        {% endfor %}
 
       {% endfor %}
       </ul>

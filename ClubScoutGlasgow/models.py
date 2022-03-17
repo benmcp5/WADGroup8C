@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core import validators
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -25,7 +26,14 @@ class Club(models.Model):
     entryPrice = models.PositiveIntegerField(default=0)
     location = models.CharField(max_length=100)
     noOfRooms = models.PositiveIntegerField(default=1)
-    openingHours = models.CharField(max_length=500)
+    openingString = """Monday:
+Tuesday:
+Wednesday:
+Thursday:
+Friday:
+Saturday:
+Sunday:"""
+    openingHours = models.TextField(max_length=500, default = openingString)
     averageOverallRating = models.FloatField(default = 0)
     instagram = models.URLField(default = "https://www.instagram.com")
     facebook = models.URLField(default = "https://www.facebook.com")

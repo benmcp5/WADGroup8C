@@ -20,10 +20,11 @@
         {% for field in form.visible_fields %}
 
           {{ field.help_text }}
-          {{ field.errors }}
+          <strong style = "color:red"> {{ field.errors }} </strong>
           <br>
           {{ field }}
           <br>
+          <hr />
         {% endfor %}
         <input type="submit" name="submit" value="Add Club"/>
       </form>
