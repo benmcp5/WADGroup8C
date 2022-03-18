@@ -17,3 +17,5 @@ class Clubs(TestCase):
     def test_ensure_all_number_fields_are_positive(self):
         club = Club("Club", -5, "Glasgow", -1, "10-10", 3.6, "www.google.com", "www.instagram.com", "www.facebook.com")
         club.save()
+
+        

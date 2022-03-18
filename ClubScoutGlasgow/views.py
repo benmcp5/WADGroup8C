@@ -78,13 +78,13 @@ def user_signup(request): #copied from twd
 def map(request):
     return render(request, 'ClubScoutGlasgow/map.html')
 
-def clubs(request, club_name_slug): #yet to add sorting options?
+def clubs(request): #yet to add sorting options?
     context_dict = {}
     try:
         club = Club.objects.order_by('name')
-        context_dict['club'] = club
+        context_dict['clubs'] = club
     except Club.DoesNotExist:
-        context_dict['club'] = None
+        context_dict['clubs'] = None
     return render(request, 'ClubScoutGlasgow/clubs.html', context=context_dict) #note clubs.html for whole list template, not club.html for individual
 
 def show_club(request, club_name_slug):
