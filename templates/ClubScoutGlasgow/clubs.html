@@ -8,4 +8,20 @@
 
 {% block body_block %}
 testing testing
+<br>
+  {% if clubs %}
+    {% for club in clubs %}
+
+      <h4>
+        <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}">{{ club.name }}</a>
+      </h4>
+
+          <strong> Average Rating: </strong> {{ club.averageOverallRating }}
+
+      <br>
+
+    {% endfor %}
+
+  {% endif %}
+
 {% endblock %}
