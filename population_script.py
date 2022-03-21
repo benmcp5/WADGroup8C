@@ -12,3 +12,4 @@ django.setup()
 
 
 def populate():
+    return;
