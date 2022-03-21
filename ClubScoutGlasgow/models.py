@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import validators
+import string
+import random
+import django.utils.timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,8 +20,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-''' OPENING HOURS NEEDS FIXED- ADD IMAGE FIELD AS WELL?'''
 
 
 class Club(models.Model):
@@ -62,18 +63,37 @@ class Review(models.Model):
     reviewer = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
     reviewID = models.CharField(max_length = 30, unique = True)
+    reviewDate = models.DateField(default=django.utils.timezone.now())
 
-    drinksPrice = models.CharField(max_length=128)
+    drinksPrice = models.IntegerField(default = 1)
     typeOfCrowd = models.CharField(max_length=30)
     popularNight = models.CharField(max_length = 9)
     avgQueueTime = models.IntegerField(default = 0)
-    staffFriendliness = models.IntegerField(default = 0)
-    qualityOfSafety = models.IntegerField(default = 0)
-    overallRating = models.IntegerField(default = 0)
-    additionalComments = models.CharField(max_length = 500)
+    staffFriendliness = models.IntegerField(default = 1)
+    qualityOfSafety = models.IntegerField(default = 1)
+    overallRating = models.IntegerField(default = 1)
+    additionalComments = models.CharField(max_length = 1000)
     reviewLikes = models.IntegerField(default = 0)
 
-    url = models.URLField()
+    def save(self, *args, **kwargs):
+        self.reviwer = User.username
+
+        super(Review, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.reviewID
+
+    def getReviewID(self):
+        self.reviewID = ""
+        if len(self.reviewer)>=6:
+            self.reviewID+=self.reviewer[6]
+        else:
+            self.reviewID+=self.reviewer + "%"*(6-len(this.reviewer))
+
+        for i in range(10):
+            self.reviewID += random.choice(string.ascii_letters)
+
+        if len(club)>=6:
+            self.reviewID+= self.club[6]
+        else:
+            self.reviewID+= self.club+"%"*(6-len(self.club))
