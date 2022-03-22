@@ -2,20 +2,20 @@ import os
 
 import django
 
-# from ClubScoutGlasgow.models import Club, Review
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WADGroup8C.settings')
 
-# NOT OPERATIONAL
-
 django.setup()
+
+from django.contrib.auth.models import User
+from ClubScoutGlasgow.models import Club, Review, UserProfile
 
 
 def populate():
 
     """
-    template
+    templates
 
+     club:
     "" : {
             "location": "",
             "openingHours": "",
@@ -27,6 +27,39 @@ def populate():
 
     """
 
+    # Key is username
+    users = {
+        "user1": {
+            "email": "user1@gmail.com",
+            "age": 23,
+        },
+        "user2": {
+            "email": "user2@gmail.com",
+            "age": 80,
+        },
+        "user3": {
+            "email": "user3@gmail.com",
+            "age": 18,
+        },
+        "user4": {
+            "email": "user4@gmail.com",
+            "age": 21,
+        },
+        "user5": {
+            "email": "user5@gmail.com",
+            "age": 19,
+        },
+        "user6": {
+            "email": "user6@gmail.com",
+            "age": 19,
+        },
+        "user7": {
+            "email": "user7@gmail.com",
+            "age": 37,
+        },
+    }
+
+    # Key is name of club
     clubs = {
         "Sub Club" : {
             "location" : "22 Jamaica Street",
@@ -77,10 +110,100 @@ def populate():
         }
     }
 
-    """
-    for i in clubs["Sub Club"]:
-        print(clubs["Sub Club"][i])
-    """
+    # Key is review ID
+    reviews = {
+        "001": {
+            "reviewer": 1,
+            "club": 4,
+            "typeOfCrowd": "trendy",
+            "popularNight": "Saturday",
+            "avgQueueTime": 45,
+            "staffFriendliness": 1,
+            "qualityOfSafety": 4,
+            "overallRating": 3,
+            "additionalComments": "do not want",
+        },
+        "002": {
+            "reviewer": 7,
+            "club": 4,
+            "typeOfCrowd": "youthful",
+            "popularNight": "Saturday",
+            "avgQueueTime": 30,
+            "staffFriendliness": 2,
+            "qualityOfSafety": 2,
+            "overallRating": 2,
+        },
+        "003": {
+            "reviewer": 6,
+            "club": 2,
+            "typeOfCrowd": "the worst",
+            "popularNight": "Friday",
+            "avgQueueTime": 60,
+            "staffFriendliness": 1,
+            "qualityOfSafety": 1,
+            "overallRating": 1,
+        },
+        "004": {
+            "reviewer": 6,
+            "club": 1,
+            "typeOfCrowd": "everyone",
+            "popularNight": "Saturday",
+            "avgQueueTime": 15,
+            "staffFriendliness": 4,
+             "qualityOfSafety": 3,
+            "overallRating": 4,
+        },
+    }
+
+    club_array = []
+    for club in clubs:
+        data = clubs[club]
+        c = add_club(club, data)
+        club_array.append(c)
+
+    user_array = []
+    for user in users:
+        u = add_user(user, users[user])
+        user_array.append(u)
+
+    for review in reviews:
+        club_id = club_array[reviews[review]["club"] - 1]
+        user_id = user_array[reviews[review]["reviewer"] - 1]
+        add_review(review, reviews[review], club_id, user_id)
+
+
+def add_review(id, data, club_id, user_id):
+    r = Review.objects.get_or_create(reviewID=id, club=club_id, reviewer=user_id)[0]
+    r.typeOfCrowd = data["typeOfCrowd"]
+    r.popularNight = data["popularNight"]
+    r.avgQueueTime = data["avgQueueTime"]
+    r.staffFriendliness = data["staffFriendliness"]
+    r.qualityOfSafety = data["qualityOfSafety"]
+    r.overallRating = data["overallRating"]
+    r.save()
+    return r
+
+
+def add_club(name, data):
+    c = Club.objects.get_or_create(name=name)[0]
+    c.location = data["location"]
+    c.openingHours = data["openingHours"]
+    c.website = data["website"]
+    c.instagram = data["instagram"]
+    c.facebook = data["facebook"]
+    c.about = data["about"]
+    c.save()
+    return c
+
+
+def add_user(name, data):
+    user = User.objects.create_user(name)
+    u = UserProfile.objects.get_or_create(user=user)[0]
+    u.email = data["email"]
+    u.age = data["age"]
+    u.save()
+    return u
+
 
 if __name__ == '__main__':
     print('-Starting population script-')
