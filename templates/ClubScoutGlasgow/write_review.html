@@ -16,7 +16,7 @@
 
         {% csrf_token %}
 
-  
+
         {% for field in form.visible_fields %}
           {{ field.errors }}
           <br>
@@ -25,7 +25,6 @@
           {{ field }}
           <br>
         {% endfor %}
-        <input type="text" id="club" name="club" value='{{ club.name }}' readonly>
         <input type="submit" name="submit" value="Submit Review" />
       </form>
   {% else %}

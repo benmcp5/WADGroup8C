@@ -5,14 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import validators
-import string
-import random
 import django.utils.timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
     email = models.EmailField()
     age = models.PositiveIntegerField(default = 18)
 
@@ -75,25 +71,5 @@ class Review(models.Model):
     additionalComments = models.CharField(max_length = 1000)
     reviewLikes = models.IntegerField(default = 0)
 
-    def save(self, *args, **kwargs):
-        self.reviwer = User.username
-
-        super(Review, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.reviewID
-
-    def getReviewID(self):
-        self.reviewID = ""
-        if len(self.reviewer)>=6:
-            self.reviewID+=self.reviewer[6]
-        else:
-            self.reviewID+=self.reviewer + "%"*(6-len(this.reviewer))
-
-        for i in range(10):
-            self.reviewID += random.choice(string.ascii_letters)
-
-        if len(club)>=6:
-            self.reviewID+= self.club[6]
-        else:
-            self.reviewID+= self.club+"%"*(6-len(self.club))

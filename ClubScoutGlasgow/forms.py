@@ -64,5 +64,4 @@ class ReviewForm(forms.ModelForm):
     class Meta:
     # Provide an association
         model = Review
-        fields = ('reviwer', 'club')
-        exclude = ('club','reviwer', 'reviewDate', 'reviewID', 'reviewLikes')
+        exclude = ('club','reviewer', 'reviewDate', 'reviewID', 'reviewLikes')
