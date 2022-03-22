@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load staticfiles %}
+
+<title>
+  {% block title_block %}
+    {{ club.name }}- Write a Review
+  {% endblock %}
+</title>
+
+{% block body_block %}
+  {% if user.is_authenticated %}
+    <h1>Write a review for {{ club.name }}</h1>
+    <div>
+      <form id="review_form" method="post" action="{% url 'ClubScoutGlasgow:write_review' club.slug %}">
+
+        {% csrf_token %}
+
+
+        {% for field in form.visible_fields %}
+          {{ field.errors }}
+          <br>
+          {{ field.help_text }}
+          <br>
+          {{ field }}
+          <br>
+        {% endfor %}
+        <input type="submit" name="submit" value="Submit Review" />
+      </form>
+  {% else %}
+    You must <a href="{% url 'ClubScoutGlasgow:login' %}">login</a> to add a new page.
+  {% endif %}
+{% endblock %}

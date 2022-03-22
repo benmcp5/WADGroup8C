@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
-from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm
+from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
+import random, string
 # Create your views here.
 
 def home(request):
@@ -14,10 +16,11 @@ def home(request):
         context_dict['clubs'] = clubs
 
         #MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
-        hive = Club.objects.get(name = 'Hive')
-        image_list = hive.images.all()
-        context_dict['images'] = image_list
-
+        '''
+        # hive = Club.objects.get(name = 'Hive')
+        # image_list = hive.images.all()
+        # context_dict['images'] = image_list
+        '''
         return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
 
 def about(request):
@@ -58,6 +61,7 @@ def user_signup(request): #copied from twd
 
             profile = profile_form.save(commit=False)
             profile.user = user
+            profile.email = user.email
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
@@ -123,13 +127,37 @@ def write_review(request, club_name_slug): #no ReviewForm yet
         form = ReviewForm(request.POST)
 
         if form.is_valid():
-            form.save(commit=True)
+            if club:
+                    review = form.save(commit=False)
+                    review.club = club
+                    review.reviewer = UserProfile.objects.get(user = request.user)
+                    review.reviewLikes = 0
+                    review.reviewID = getReviewID(review.reviewer, review.club)
+                    review.save()
+                    return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
-            print("-BCBCVJBCVJC")
-            return redirect('/ClubScoutGlasgow/')
     else:
         print(form.errors)
+    context_dict = {'form': form, 'club': club}
     return render(request, 'ClubScoutGlasgow/write_review.html', context = context_dict)
+
+def getReviewID(reviewer, club):
+    reviewID = ""
+    reviewer = str(reviewer.user.username)
+    club = club.name
+    if len(reviewer)>=6:
+        reviewID+=reviewer[:6]
+    else:
+        reviewID+=reviewer + "%"*(6-len(reviewer))
+
+    for i in range(10):
+        reviewID += random.choice(string.ascii_letters)
+
+    if len(club)>=6:
+        reviewID+= club[:6]
+    else:
+        reviewID+= club+"%"*(6-len(club))
+    return reviewID
 
 @staff_member_required
 def add_club(request):
