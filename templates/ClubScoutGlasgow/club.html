@@ -14,49 +14,64 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="WnfP1Jl3"></script>
 
+
   <h1>{{ club.name }}</h1>
-    <h4>Photos of club</h4>
-        <img src="{% static 'images/ClubImages/hive1.jpeg' %}" alt="hive pic aint working" />
-    {{ club.images }}
-    <h4>Social media handles</h4>
-        <div class="fb-page" data-href="https://www.facebook.com/SWG3glasgow/" data-tabs="timeline" data-width="" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/SWG3glasgow/" class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/SWG3glasgow/">SWG3</a>
-            </blockquote>
+    <div class ="club-content">
+        <div class="club-photos">
+            <h4>Photos of club</h4>
+                <img src="{% static 'images/ClubImages/hive1.jpeg' %}" alt="hive pic aint working" />
+            {{ club.images }}
         </div>
-    <div><a href="https://www.instagram.com/swg3glasgow/"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
+        <div class="club-social-media">
+            <h4>Social media handles</h4>
+            <div class="fb-page" data-href="https://www.facebook.com/SWG3glasgow/" data-tabs="timeline" data-width="" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/SWG3glasgow/" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/SWG3glasgow/">SWG3</a>
+                </blockquote>
+            </div>
+            <div><a href="https://www.instagram.com/swg3glasgow/"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
+        </div>
 
+        <div class="club-opening-hours">
+            <h4>Opening times</h4>
+            <p>Opening hours:</p>
+            {{ club.openingHours }}
+        </div>
 
+        <div class="club-about">
+            <h4>About the club, location, type of music etc</h4>
+            <p>Address</p>
+            {{ club.location }}
+        </div>
 
+        <div class="club-info">
+            <h4>Table containing all info about club ie rating, price, queue times etc</h4>
+            <p>Average overall rating</p>
+            {{ club.averageOverallRating }}
+            <p>entry price</p>
+            {{ club.entryPrice }}
+            <p>number of rooms</p>
+            {{ club.noOfRooms }}
+        </div>
 
-    <h4>Opening times</h4>
-    <p>Opening hours:</p>
-    {{ club.openingHours }}
+        <div class="club-map">
+            <h4>Map displaying location of club</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2238.888905057713!2d-4.301775384065115!3d55.86459388058342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488845d835515a49%3A0x49a638f09124556d!2sSWG3%20Studio%20Warehouse!5e0!3m2!1sen!2suk!4v1648043468244!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <h4>Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes</h4>
+            {{ club.review_set.get }}
+        </div>
 
-    <h4>About the club, location, type of music etc</h4>
-    <p>Address</p>
-    {{ club.location }}
-    <h4>Table containing all info about club ie rating, price, queue times etc</h4>
-    <p>Average overall rating</p>
-    {{ club.averageOverallRating }}
-    <p>entry price</p>
-    {{ club.entryPrice }}
-    <p>number of rooms</p>
-    {{ club.noOfRooms }}
-    <h4>Map displaying location of club</h4>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2238.888905057713!2d-4.301775384065115!3d55.86459388058342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488845d835515a49%3A0x49a638f09124556d!2sSWG3%20Studio%20Warehouse!5e0!3m2!1sen!2suk!4v1648043468244!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    <h4>Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes</h4>
-
-
-
-    {% if user.is_authenticated %}
-        {% if club %}
-          <a href = "{% url 'ClubScoutGlasgow:write_review' club.slug %}"> Write a review for {{ club.name }}</a>
-        {% else %}
-          The specified club does not exist.
-        {% endif %}
-        {% else %}
-        <a href = "{% url 'ClubScoutGlasgow:signup' %}"> Sign up to write a review for {{ club.name }}</a>
-    {% endif %}
+        <div class="club-leave-review">
+            {% if user.is_authenticated %}
+                {% if club %}
+                  <a href = "{% url 'ClubScoutGlasgow:write_review' club.slug %}"> Write a review for {{ club.name }}</a>
+                {% else %}
+                  The specified club does not exist.
+                {% endif %}
+                {% else %}
+                <a href = "{% url 'ClubScoutGlasgow:signup' %}"> Sign up to write a review for {{ club.name }}</a>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
