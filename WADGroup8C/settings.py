@@ -30,12 +30,7 @@ SECRET_KEY = '4lw_xmz3+v&fw%h(n!+i!*)03syz0w1a!v)92p!y(hr$v1gkn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['clubscoutglasgow.pythonanywhere.com','127.0.0.1']
-=======
 ALLOWED_HOSTS = ['clubscoutglasgow.pythonanywhere.com', '127.0.0.1']
->>>>>>> f6304d7a5de842d22f8351cd4f02bd632278b1a3
-
 
 # Application definition
 
@@ -64,7 +59,7 @@ ROOT_URLCONF = 'WADGroup8C.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [TEMPLATE_DIR],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'WADGroup8C.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -91,7 +85,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -101,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {'min_length':8}
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -110,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -124,7 +116,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
