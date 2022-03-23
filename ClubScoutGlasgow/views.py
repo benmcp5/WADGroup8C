@@ -8,25 +8,29 @@ from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
 import random, string
+
+
 # Create your views here.
 
 def home(request):
-        context_dict = {}
-        clubs = Club.objects.order_by('-averageOverallRating')[:5] #to be replaced
-        context_dict['clubs'] = clubs
+    context_dict = {}
+    clubs = Club.objects.order_by('-averageOverallRating')[:5]  # to be replaced
+    context_dict['clubs'] = clubs
 
-        #MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
-        '''
+    # MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
+    '''
         # hive = Club.objects.get(name = 'Hive')
         # image_list = hive.images.all()
         # context_dict['images'] = image_list
         '''
-        return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
+    return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
+
 
 def about(request):
     return render(request, 'ClubScoutGlasgow/about.html')
 
-def user_login(request): #copied from twd, maybe not compatible?
+
+def user_login(request):  # copied from twd, maybe not compatible?
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -43,11 +47,12 @@ def user_login(request): #copied from twd, maybe not compatible?
         else:
             print(f"Invalid login details: {username}, {password}")
             messages.ERROR: (request, "Invalid Login Details")
-            return redirect(reverse('ClubScoutGlasgow:login') )
+            return redirect(reverse('ClubScoutGlasgow:login'))
     else:
-        return render(request,'ClubScoutGlasgow/login.html')
+        return render(request, 'ClubScoutGlasgow/login.html')
 
-def user_signup(request): #copied from twd
+
+def user_signup(request):  # copied from twd
     registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -75,32 +80,38 @@ def user_signup(request): #copied from twd
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    context_dict = {'user_form': user_form,'profile_form': profile_form, 'registered': registered}
+    context_dict = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
 
-    return render(request, 'ClubScoutGlasgow/signup.html', context = context_dict )
+    return render(request, 'ClubScoutGlasgow/signup.html', context=context_dict)
+
 
 def map(request):
     return render(request, 'ClubScoutGlasgow/map.html')
 
-def clubs(request): #yet to add sorting options?
+
+def clubs(request):  # yet to add sorting options?
     context_dict = {}
     try:
         club = Club.objects.order_by('name')
         context_dict['clubs'] = club
     except Club.DoesNotExist:
         context_dict['clubs'] = None
-    return render(request, 'ClubScoutGlasgow/clubs.html', context=context_dict) #note clubs.html for whole list template, not club.html for individual
+    return render(request, 'ClubScoutGlasgow/clubs.html',
+                  context=context_dict)  # note clubs.html for whole list template, not club.html for individual
+
 
 def show_club(request, club_name_slug):
-    context_dict={}
+    context_dict = {}
     try:
-        club  = Club.objects.get(slug = club_name_slug)
+        club = Club.objects.get(slug=club_name_slug)
         context_dict['club'] = club
 
     except Club.DoesNotExist:
         context_dict['club'] = None
 
-    return render(request, 'ClubScoutGlasgow/club.html', context = context_dict)
+
+    return render(request, 'ClubScoutGlasgow/club.html', context=context_dict)
+
 
 @login_required
 def user_logout(request):
@@ -109,14 +120,16 @@ def user_logout(request):
     # Take the user back to the homepage.
     return redirect(reverse('ClubScoutGlasgow:home'))
 
+
 def club_request(request):
     return render(request, 'ClubScoutGlasgow/club_request.html')
 
+
 @login_required
-def write_review(request, club_name_slug): #no ReviewForm yet
+def write_review(request, club_name_slug):  # no ReviewForm yet
     context_dict = {}
     try:
-        club = Club.objects.get(slug = club_name_slug)
+        club = Club.objects.get(slug=club_name_slug)
     except Club.DoesNotExist:
         club = None
     if club == None:
@@ -128,40 +141,41 @@ def write_review(request, club_name_slug): #no ReviewForm yet
 
         if form.is_valid():
             if club:
-                    review = form.save(commit=False)
-                    review.club = club
-                    review.reviewer = UserProfile.objects.get(user = request.user)
-                    review.reviewLikes = 0
-                    review.reviewID = getReviewID(review.reviewer, review.club)
-                    review.save()
-                    return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
+                review = form.save(commit=False)
+                review.club = club
+                review.reviewer = UserProfile.objects.get(user=request.user)
+                review.reviewLikes = 0
+                review.reviewID = getReviewID(review.reviewer, review.club)
+                review.save()
+                return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
     else:
         print(form.errors)
     context_dict = {'form': form, 'club': club}
-    return render(request, 'ClubScoutGlasgow/write_review.html', context = context_dict)
+    return render(request, 'ClubScoutGlasgow/write_review.html', context=context_dict)
+
 
 def getReviewID(reviewer, club):
     reviewID = ""
     reviewer = str(reviewer.user.username)
     club = club.name
-    if len(reviewer)>=6:
-        reviewID+=reviewer[:6]
+    if len(reviewer) >= 6:
+        reviewID += reviewer[:6]
     else:
-        reviewID+=reviewer + "%"*(6-len(reviewer))
+        reviewID += reviewer + "%" * (6 - len(reviewer))
 
     for i in range(10):
         reviewID += random.choice(string.ascii_letters)
 
-    if len(club)>=6:
-        reviewID+= club[:6]
+    if len(club) >= 6:
+        reviewID += club[:6]
     else:
-        reviewID+= club+"%"*(6-len(club))
+        reviewID += club + "%" * (6 - len(club))
     return reviewID
+
 
 @staff_member_required
 def add_club(request):
-
     form = ClubForm()
     # A HTTP POST?
     if request.method == 'POST':
@@ -175,7 +189,7 @@ def add_club(request):
             return redirect('/ClubScoutGlasgow/')
     else:
         # The supplied form contained errors -
-         # just print them to the terminal.
+        # just print them to the terminal.
         print(form.errors)
         # Will handle the bad form, new form, or no form supplied cases. # Render the form with error messages (if any).
     return render(request, 'ClubScoutGlasgow/add_club.html', {'form': form})
