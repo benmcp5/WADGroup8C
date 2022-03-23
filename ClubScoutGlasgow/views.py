@@ -105,6 +105,8 @@ def show_club(request, club_name_slug):
     try:
         club = Club.objects.get(slug=club_name_slug)
         context_dict['club'] = club
+        image_list = club.images.all()
+        context_dict['images'] = image_list
 
     except Club.DoesNotExist:
         context_dict['club'] = None

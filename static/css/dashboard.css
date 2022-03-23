@@ -109,3 +109,46 @@ body {
   position: relative;
   left: 30px;
 }
+
+/*
+ * Images
+ */
+
+ .slider-wrap{
+   position:fixed;
+   top:20%;
+   left:20%;
+   width:80%;
+   height:300px;
+   overflow: hidden;
+   border:1px solid black;
+ }
+
+ .slider{
+   position:absolute;
+   top:0;
+   left:0;
+   height:100%;
+   width:4000px;
+   display: flex;
+   will-change: transform;
+ }
+
+ .slider-item{
+   position: relative;
+   flex:1;
+   overflow: hidden;
+   filter: grayscale(100%);
+
+ }
+
+ .img-div{
+   position: relative;
+   left: 1%;
+   top: 2.5%;
+   width: 98%;
+   height: 95%;
+   background-size: cover;
+   background-position: cover;
+
+ }

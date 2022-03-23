@@ -19,17 +19,34 @@
     <div class ="club-content">
         <div class="club-photos">
             <h4>Photos of club</h4>
-                <img src="{% static 'images/ClubImages/hive1.jpeg' %}" alt="hive pic aint working" />
-            {{ club.images }}
+            <br>
+            {% if images %}
+                <div class = "slider-wrap">
+                    <div class = "slider">
+                        <div class = "slider-item">
+                            <div class = "img-div"></div>
+                        </div>
+                        <div class = "slider-item">
+                            <div class = "img-div"></div>
+                        </div>
+                        <div class = "slider-item">
+                            <div class = "img-div"></div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <script src = "CSG.js"></script>
         </div>
+
         <div class="club-social-media">
             <h4>Social media handles</h4>
-            <div class="fb-page" data-href="https://www.facebook.com/SWG3glasgow/" data-tabs="timeline" data-width="" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <blockquote cite="https://www.facebook.com/SWG3glasgow/" class="fb-xfbml-parse-ignore">
-                    <a href="https://www.facebook.com/SWG3glasgow/">SWG3</a>
+            <div class="fb-page" data-href="{{ club.facebook }}" data-tabs="timeline" data-width="" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="{{ club.facebook }}" class="fb-xfbml-parse-ignore">
+                    <a href="{{ club.facebook }}">{{ club.name }}</a>
                 </blockquote>
             </div>
-            <div><a href="https://www.instagram.com/swg3glasgow/"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
+            <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
         </div>
 
         <div class="club-opening-hours">
@@ -73,5 +90,6 @@
             {% endif %}
         </div>
     </div>
+
 
 {% endblock %}
