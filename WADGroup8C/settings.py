@@ -30,7 +30,7 @@ SECRET_KEY = '4lw_xmz3+v&fw%h(n!+i!*)03syz0w1a!v)92p!y(hr$v1gkn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['clubscoutglasgow.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
