@@ -68,6 +68,9 @@
     right:20%;
   } */
 
+  .checked{
+    color:orange;
+  }
 
 /* Slideshow container */
 .slider-wrap{
@@ -137,4 +140,10 @@
 @keyframes fade {
   from {opacity: .4} 
   to {opacity: 1}
+}
+
+.extra{
+  height: 100px;
+  width: 200px;
+  border:sold 1px black;
 }
