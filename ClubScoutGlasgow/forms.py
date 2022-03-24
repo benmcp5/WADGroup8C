@@ -33,6 +33,7 @@ class ClubForm(forms.ModelForm):
     website = forms.URLField(required=True, help_text="Website")
     instagram = forms.URLField(required=True, help_text="Instagram")
     facebook = forms.URLField(required=True, help_text="Facebook")
+    mapSrc = forms.URLField(required=True, help_text="Map Source code")
     about = forms.CharField(required=True,max_length=1000, widget=forms.Textarea(attrs={'rows': 6, 'cols': 40}), help_text="About this club" )
 
     # An inline class to provide

@@ -35,6 +35,7 @@ Sunday:"""
     instagram = models.URLField(default = "https://www.instagram.com")
     facebook = models.URLField(default = "https://www.facebook.com")
     website = models.URLField(default = "https://www.")
+    mapSrc = models.URLField(default = "https://maps.google.com/maps?q=firewater&t=&z=13&ie=UTF8&iwloc=&output=embed")
     about = models.TextField(max_length = 500, default = "")
 
     slug = models.SlugField(unique = True, default ="")

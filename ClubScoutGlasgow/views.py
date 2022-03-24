@@ -111,13 +111,15 @@ def show_club(request, club_name_slug):
         context_dict['reviews'] = review_list
 
         totalRating = 0
-        counter = 1
-        for review in review_list:
-            counter+=1
-            totalRating += review.overallRating
+        counter = 0
+        if review_list:
 
-        club.averageOverallRating = totalRating/(counter-1)
-        club.save()
+            for review in review_list:
+                counter+=1
+                totalRating += review.overallRating
+
+            club.averageOverallRating = totalRating/(counter)
+            club.save()
         context_dict['club'] = club
     except Club.DoesNotExist:
         context_dict['club'] = None
@@ -165,13 +167,16 @@ def write_review(request, club_name_slug):
 
                 review_list = Review.objects.filter(club = club)
                 totalRating = 0
-                counter = 1
-                for review in review_list:
-                    counter+=1
-                    totalRating += review.overallRating
+                counter = 0
+                if review_list:
 
-                club.averageOverallRating = totalRating/(counter-1)
-                club.save()
+                    for review in review_list:
+                        counter+=1
+                        totalRating += review.overallRating
+
+                    club.averageOverallRating = totalRating/(counter)
+                    club.save()
+                    
                 
                 return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
