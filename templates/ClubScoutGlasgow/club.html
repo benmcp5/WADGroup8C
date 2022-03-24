@@ -10,33 +10,34 @@
   {% endif %}
 {% endblock %}
 
+
 {% block body_block %}
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="WnfP1Jl3"></script>
-
-
-  <h1>{{ club.name }}</h1>
+    <link href="{%  static 'css/club.css'%}" rel="stylesheet"/>
+    <script src = "{% static 'javascript/CSG.js' %}"></script>
+  
     <div class ="club-content">
+        <h1>{{ club.name }}</h1>
         <div class="club-photos">
             <h4>Photos of club</h4>
             <br>
             {% if images %}
-                <div class = "slider-wrap">
+    
+                <div class = "slider-wrap" >
                     <div class = "slider">
-                        <div class = "slider-item">
-                            <div class = "img-div"></div>
-                        </div>
-                        <div class = "slider-item">
-                            <div class = "img-div"></div>
-                        </div>
-                        <div class = "slider-item">
-                            <div class = "img-div"></div>
-                        </div>
+                        {% for image in images %}
+                            <div class = "img-div" >
+                                <img src = "{% static image.url %}" alt = 'image error'/> 
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
+                <a class="prev-btn" onclick="plusSlides(-1)"><</a>
+                <a class="next-btn" onclick="plusSlides(1)">></a>
             {% endif %}
 
-            <script src = "CSG.js"></script>
+           
         </div>
 
         <div class="club-social-media">
