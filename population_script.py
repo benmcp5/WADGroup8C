@@ -62,11 +62,13 @@ def populate():
     # Key is name of club
     clubs = {
         "Sub Club" : {
+            "EntryPrice":8,
             "location" : "22 Jamaica Street",
             "openingHours" : "23:00-3:00",
             "website" : "https://subclub.co.uk/",
             "instagram" : "https://www.instagram.com/subclub87/",
             "facebook" : "https://www.facebook.com/subclub",
+            "mapSrc": "https://maps.google.com/maps?q=Sub%20Club&t=&z=13&ie=UTF8&iwloc=&output=embed",
             "about" : "The Sub Club is a club and music venue located at 22 Jamaica Street in Glasgow, Scotland."
                       " It opened 1 April 1987 and is the longest running underground dance club in the world."
                       " The 3,500-square-foot (330 m2) basement space can legally hold up to 410 people."
@@ -80,6 +82,7 @@ def populate():
             "website": "https://garageglasgow.co.uk/",
             "instagram": "https://www.instagram.com/thegarageglasgow/",
             "facebook": "https://www.facebook.com/garageglasgow/",
+            "mapSrc": "https://maps.google.com/maps?q=The%20Garage%20490%20Sauchiehall%20St&t=&z=13&ie=UTF8&iwloc=&output=embed",
             "about": "The Garage (formerly known as The Mayfair) is a music venue and nightclub located at 490 "
                      "Sauchiehall Street in Glasgow, Scotland. It is Scotland's largest nightclub. The main "
                      "hall was the first Locarno ballroom in the UK, although it has since been remodelled by "
@@ -95,6 +98,7 @@ def populate():
             "website": "https://www.nicensleazy.com/",
             "instagram": "https://www.instagram.com/nicensleazy/",
             "facebook": "https://www.facebook.com/nicensleazyglasgow/",
+            "mapSrc": "https://maps.google.com/maps?q=nice%20n%20sleazy&t=&z=13&ie=UTF8&iwloc=&output=embed",
             "about": "Buzzing bar with poster plastered walls and small capacity creating atmospheric musical "
                      "intimacy.",
         },
@@ -104,6 +108,18 @@ def populate():
             "website": "https://swg3.tv/",
             "instagram": "https://www.instagram.com/swg3glasgow/",
             "facebook": "https://www.facebook.com/SWG3glasgow/",
+            "mapSrc": "https://maps.google.com/maps?q=swg3&t=&z=13&ie=UTF8&iwloc=&output=embed",
+            "about": "SWG3 (Studio Warehouse Glasgow) is a multi-disciplinary arts space in the westend of Glasgow. "
+                     "We run an annual programme of exhibitions, band nights and events as well as being home to a "
+                     "community of over 120 artists and musicians.",
+        },
+        "Firewater" : {
+            "location": "100 Eastvale Pl, Stobcross Rd, Glasgow G3 8QG",
+            "openingHours": "10:00-18:00",
+            "website": "https://swg3.tv/",
+            "instagram": "https://www.instagram.com/swg3glasgow/",
+            "facebook": "https://www.facebook.com/SWG3glasgow/",
+            "mapSrc": "https://maps.google.com/maps?q=firewater&t=&z=13&ie=UTF8&iwloc=&output=embed",
             "about": "SWG3 (Studio Warehouse Glasgow) is a multi-disciplinary arts space in the westend of Glasgow. "
                      "We run an annual programme of exhibitions, band nights and events as well as being home to a "
                      "community of over 120 artists and musicians.",
@@ -150,7 +166,7 @@ def populate():
             "popularNight": "Saturday",
             "avgQueueTime": 15,
             "staffFriendliness": 4,
-             "qualityOfSafety": 3,
+            "qualityOfSafety": 3,
             "overallRating": 4,
         },
     }
@@ -190,6 +206,7 @@ def add_club(name, data):
     c.openingHours = data["openingHours"]
     c.website = data["website"]
     c.instagram = data["instagram"]
+    c.mapSrc = data["mapSrc"]
     c.facebook = data["facebook"]
     c.about = data["about"]
     c.save()

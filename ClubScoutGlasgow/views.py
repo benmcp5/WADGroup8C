@@ -104,12 +104,27 @@ def show_club(request, club_name_slug):
     context_dict = {}
     try:
         club = Club.objects.get(slug=club_name_slug)
-        context_dict['club'] = club
+        
         image_list = club.images.all()
         context_dict['images'] = image_list
+        review_list = Review.objects.filter(club = club)
+        context_dict['reviews'] = review_list
 
+        totalRating = 0
+        counter = 0
+        if review_list:
+
+            for review in review_list:
+                counter+=1
+                totalRating += review.overallRating
+
+            club.averageOverallRating = totalRating/(counter)
+            club.save()
+        context_dict['club'] = club
     except Club.DoesNotExist:
         context_dict['club'] = None
+    except Review.DoesNotExist:
+         context_dict['reviews'] = None
 
 
     return render(request, 'ClubScoutGlasgow/club.html', context=context_dict)
@@ -128,7 +143,7 @@ def club_request(request):
 
 
 @login_required
-def write_review(request, club_name_slug):  # no ReviewForm yet
+def write_review(request, club_name_slug): 
     context_dict = {}
     try:
         club = Club.objects.get(slug=club_name_slug)
@@ -149,6 +164,20 @@ def write_review(request, club_name_slug):  # no ReviewForm yet
                 review.reviewLikes = 0
                 review.reviewID = getReviewID(review.reviewer, review.club)
                 review.save()
+
+                review_list = Review.objects.filter(club = club)
+                totalRating = 0
+                counter = 0
+                if review_list:
+
+                    for review in review_list:
+                        counter+=1
+                        totalRating += review.overallRating
+
+                    club.averageOverallRating = totalRating/(counter)
+                    club.save()
+                    
+                
                 return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
     else:
