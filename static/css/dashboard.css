@@ -107,7 +107,13 @@ body {
 
 .club-content {
   position: relative;
-  left: 30px;
+  /*margin: auto;
+  width: 50%;
+  left: 50px;
+
+   */
+  width: 200px;
+  right: 5px;
 }
 
 /*

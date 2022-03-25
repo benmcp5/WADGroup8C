@@ -14,7 +14,6 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="WnfP1Jl3"></script>
 
-
   <h1>{{ club.name }}</h1>
     <div class ="club-content">
         <div class="club-photos">
@@ -74,6 +73,8 @@
         <div class="club-map">
             <h4>Map displaying location of club</h4>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2238.888905057713!2d-4.301775384065115!3d55.86459388058342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488845d835515a49%3A0x49a638f09124556d!2sSWG3%20Studio%20Warehouse!5e0!3m2!1sen!2suk!4v1648043468244!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="club-reviews">
             <h4>Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes</h4>
             {{ club.review_set.get }}
         </div>
