@@ -36,9 +36,24 @@
                 </div>
                 <a class="prev-btn" onclick="plusSlides(-1)"><</a>
                 <a class="next-btn" onclick="plusSlides(1)">></a>
+                {% else %}
+                <img src="{% static 'images/ClubImages/hive2.jpeg' %}" alt="png of sadness" />
             {% endif %}
+        </div>
 
-           
+        <div class="club-combodiv">
+
+        <div class="club-about">
+            <h4>About the club, location, type of music etc</h4>
+            <p>Address</p>
+            {{ club.location }}
+            {{ club.about }}
+        </div>
+
+        <div class="club-opening-hours">
+            <h4>Opening times</h4>
+            <p>Opening hours:</p>
+            {{ club.openingHours }}
         </div>
 
         <div class="club-social-media">
@@ -51,17 +66,11 @@
             <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
         </div>
 
-        <div class="club-opening-hours">
-            <h4>Opening times</h4>
-            <p>Opening hours:</p>
-            {{ club.openingHours }}
         </div>
 
-        <div class="club-about">
-            <h4>About the club, location, type of music etc</h4>
-            <p>Address</p>
-            {{ club.location }}
-        </div>
+
+
+
 
         <div class="club-info">
             <h4>Table containing all info about club ie rating, price, queue times etc</h4>
@@ -78,6 +87,8 @@
             <iframe src= {{ club.mapSrc }} width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             
         </div>
+
+        <div class="club-reviews">
         <style>
             .checked {
               color: orange;
@@ -114,6 +125,7 @@
                 {{ review.additionalComments }}
              <hr>
             {% endfor %}
+        </div>
 
         <div class="club-leave-review">
             {% if user.is_authenticated %}
