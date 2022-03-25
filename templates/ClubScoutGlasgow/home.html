@@ -11,33 +11,101 @@
 
   <h1> Home </h1>
 
-    {% if user.is_authenticated %}
-	<div>
-        Howdy {{ user.username }}!
-	</div>
-    {% else %}
-	<div>
-        Hey there partner!
-	</div>
-		  <a href="{% url 'ClubScoutGlasgow:login' %}">Login/register</a>
-    {% endif %}
-    {% if images %}
-      {% for image in images %}
-        <img src= '{% static image.url %}' alt="ERROR" />
-      {% endfor %}
-    {% endif %}
+
+
+    <!--new from bootstrap-->
+    <main>
+
+      <section class="py-5 text-center container">
+          <div class="home-main">
+              <div class="main">
+                  <div class="module">
+                    <header class="home-main-header">
+                        <h1>ClubScoutGlasgow</h1>
+                        {% if user.is_authenticated %}
+                        <div>
+                            <br>
+                            <p class="home-main-h1">Welcome back {{ user.username }}!</p>
+                            <br>
+                        </div>
+                        {% else %}
+                        <br>
+                        <div class="home-main-h1">
+                            Welcome to ClubScoutGlasgow!
+                            <br>
+                        </div>
+                        {% endif %}
+                    </header>
+                  </div>
+
+                  <div class="top-padding">
+                      <p>
+                          {% if user.is_authenticated %}
+                              <a href="{% url 'ClubScoutGlasgow:clubs' %}" class="btn btn-primary my-2">Clubs A-Z</a>
+                              <a href="{% url 'ClubScoutGlasgow:add_club' %}" class="btn btn-primary my-2">Add A Club</a>
+                          {% else %}
+                              <a href="{% url 'ClubScoutGlasgow:login' %}" class="btn btn-primary my-2">Login</a>
+                              <a href="{% url 'ClubScoutGlasgow:signup' %}" class="btn btn-secondary my-2">Register</a>
+                          {% endif %}
+                      </p>
+                  </div>
+              </div>
+      </div>
+      </section>
+
+
     {% if clubs %}
       <ul>
       {% for club in clubs %}
-        <li> {{ club.name }}</li>
-        <li> {{ club.location }}</li>
+          <div class="album py-5 bg-light">
+
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <!-- img src= '' alt="ERROR" / -->
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                </svg>
+                <div class="card-body">
+                    {{ club.name }}
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}" class="btn btn-sm btn-outline-secondary">View Club Page</a>
+                        <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}" class="btn btn-sm btn-outline-secondary">Leave a review for {{ club.name }}</a>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
 
       {% endfor %}
       </ul>
     {% else %}
         <strong>No clubs</strong>
     {% endif %}
-	<div>
-	<img src="{% static 'images/temporary_Hive_Maps_Screenshot.png' %}" alt="Screenshot of Hive on Gmaps" />
-	</div>
+
+
+    </main>
+
+
+
+
+    {% if images %}
+      {% for image in images %}
+        <img src= '{% static image.url %}' alt="" />
+      {% endfor %}
+    {% endif %}
+
+
 {% endblock %}

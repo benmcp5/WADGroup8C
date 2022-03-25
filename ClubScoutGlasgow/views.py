@@ -16,6 +16,12 @@ def home(request):
     context_dict = {}
     clubs = Club.objects.order_by('-averageOverallRating')[:5]  # to be replaced
     context_dict['clubs'] = clubs
+    image_list =[]
+
+    for club in clubs:
+        image_list.append(club.images)
+    context_dict['images'] = image_list
+
 
     # MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
     '''
