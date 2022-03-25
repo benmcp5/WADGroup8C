@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'ClubScoutGlasgow/base.html' %}
+{% load static %}
+
+{% block title_block %}
+  Clubs A-Z
+{% endblock %}
+
+{% block body_block %}
+    <h1>Search Results for {{query}}</h1>
+<br>
+  {% if clubs %}
+    {% for club in clubs %}
+      <div style="border: 1px solid black;border-radius: 5px; padding: 10px 20px;width: 70%; background-color: #e3e3e3;">
+        <h4>
+          <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}">{{ club.name }}</a>
+        </h4>
+  
+        <strong> Average Rating: </strong> {{ club.averageOverallRating }}
+      </div>
+
+      <br>
+
+    {% endfor %}
+
+  {% endif %}
+
+{% endblock %}

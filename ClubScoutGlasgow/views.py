@@ -8,6 +8,8 @@ from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
 import random, string
+import json
+import xmltodict
 
 
 # Create your views here.
@@ -95,6 +97,19 @@ def map(request):
     return render(request, 'ClubScoutGlasgow/map.html')
 
 
+def search_club(request):
+    context_dict = {}
+    query = request.GET['query']
+    context_dict["query"] = query
+    try:
+        club = Club.objects.filter(name__icontains=query)
+        context_dict['clubs'] = club
+    except Club.DoesNotExist:
+        context_dict['clubs'] = None
+    return render(request, 'ClubScoutGlasgow/search.html', context=context_dict)
+
+
+
 def clubs(request):  # yet to add sorting options?
     context_dict = {}
     try:
@@ -115,6 +130,17 @@ def show_club(request, club_name_slug):
         context_dict['images'] = image_list
         review_list = Review.objects.filter(club = club)
         context_dict['reviews'] = review_list
+
+        if bool(club.menu):
+            with open(club.menu.path) as xml_file:
+                data_dict = xmltodict.parse(xml_file.read())
+                xml_file.close()
+            print(data_dict["menu"]["drink"])
+            json_data = json.loads(json.dumps(data_dict["menu"]))
+            print(type(json_data))
+            context_dict["menus"] = json_data["drink"]
+        else:
+            context_dict['menu'] = []
 
         totalRating = 0
         counter = 0
