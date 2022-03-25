@@ -55,6 +55,7 @@
 
 
     {% if clubs %}
+        <h4>Top 5 Clubs With Highest Average Ratings</h4>
       <ul>
       {% for club in clubs %}
           <div class="album py-5 bg-light">
@@ -72,14 +73,15 @@
                 </svg>
                 <div class="card-body">
                     {{ club.name }}
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}" class="btn btn-sm btn-outline-secondary">View Club Page</a>
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'ClubScoutGlasgow:write_review' club.slug %}" class="btn btn-sm btn-outline-primary">Leave a review for {{ club.name }}</a>
-                        {% endif %}
-                    </div>
+                    <p class="card-text"><strong> Average Rating: </strong> {{ club.averageOverallRating }} </p>
+                    <p class="card-text">{{ club.about }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}" class="btn btn-sm btn-outline-secondary">View Club Page</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'ClubScoutGlasgow:write_review' club.slug %}" class="btn btn-sm btn-outline-primary">Leave a review for {{ club.name }}</a>
+                            {% endif %}
+                        </div>
                     <small class="text-muted">10 days</small>
                   </div>
                 </div>
