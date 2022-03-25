@@ -218,6 +218,9 @@ def write_review(request, club_name_slug):
     return render(request, 'ClubScoutGlasgow/write_review.html', context=context_dict)
 
 
+
+
+
 def getReviewID(reviewer, club):
     reviewID = ""
     reviewer = str(reviewer.user.username)
