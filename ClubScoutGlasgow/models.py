@@ -37,6 +37,7 @@ Sunday:"""
     website = models.URLField(default = "https://www.")
     mapSrc = models.URLField(default = "https://maps.google.com/maps?q=firewater&t=&z=13&ie=UTF8&iwloc=&output=embed")
     about = models.TextField(max_length = 500, default = "")
+    menu = models.FileField(upload_to='static/Menu/')
 
     slug = models.SlugField(unique = True, default ="")
 

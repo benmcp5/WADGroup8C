@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
+{% load static %}
 {% load ClubScoutGlasgow_template_tags %}
 
 <html>
@@ -32,8 +32,15 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+                <form method="get" action="/ClubScoutGlasgow/search" style="margin-left: 10rem;margin-top: 1rem; margin-bottom: 2rem;width:60%">
+                    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="query" id="search"/>
+                    <!-- <input type="submit" style="background:teal;color:red;padding:10px 20px;margin:5px 10px;border-radius: 10px;">Search Club</input> -->
+                </form>
             </nav>
+        <br></br>
+        <br/>
+        <br/>
+
         </header>
 
         <div class="container-fluid">

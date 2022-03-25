@@ -6,6 +6,7 @@ app_name = 'ClubScoutGlasgow'
 urlpatterns = [
     path('', views.home, name='home'),
     path('home/', views.home, name='home'),
+    path('search/', views.search_club, name="search"),
     path('about/', views.about, name="about"),
     path('login/', views.user_login, name='login'),
     path('signup/', views.user_signup, name='signup'),
