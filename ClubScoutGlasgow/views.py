@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
-import random, string
-import json
-import xmltodict
+from django.conf import settings
+import random, string, json, xmltodict, os
+
 
 
 # Create your views here.
@@ -142,6 +142,7 @@ def show_club(request, club_name_slug):
         #else:
          #   context_dict['menu'] = []
 
+        
         totalRating = 0
         counter = 0
         totalQueueTime = 0
@@ -165,6 +166,8 @@ def show_club(request, club_name_slug):
             club.averageStaffQuality = totalStaffQuality/(counter)
             club.save()
         context_dict['club'] = club
+
+        
     except Club.DoesNotExist:
         context_dict['club'] = None
     except Review.DoesNotExist:

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import validators
 import django.utils.timezone
+from django.conf import settings
 
 
 class UserProfile(models.Model):
@@ -50,9 +51,9 @@ Sunday:"""
 
 class ClubImage(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='static/images/ClubImages/')
+    image = models.ImageField(upload_to='images/ClubImages/')
     imageName = image.upload_to.split('/')
-    imageName = imageName[3]
+    imageName = imageName[2]
     url = models.CharField(max_length=500, default='images/ClubImages/' + str(imageName))
 
 

@@ -1,6 +1,7 @@
 <!DOCTYPEhtml>
 {% extends 'ClubScoutGlasgow/base.html' %}
 {% load staticfiles %}
+{% load static%}
 
 {% block title_block %}
   {% if club %}
@@ -40,13 +41,6 @@
 
 
 
-
-
-
-
-
-
-
     <h1 class="display-4 fw-normal"> {{ club.name }}</h1>
     <br>
     <main>
@@ -58,15 +52,22 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="{% static 'images/ClubImages/hive/hive1.jpeg' %}" alt="First slide" style="object-fit: cover;">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="{% static 'images/ClubImages/hive/hive2.jpeg' %}" alt="Second slide" style="object-fit: cover;">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="{% static 'images/ClubImages/hive/hive3.jpeg' %}" alt="Third slide" style="object-fit: cover;">
-        </div>
+        
+        {% for image in images %}
+          {% if forloop.counter == 1 %}
+          <div class="carousel-item active">
+            <img class="d-block w-100" src= "{{MEDIA_URL}}{{image.url}}" alt="First slide" style="object-fit: cover;">
+          </div>
+          {% else %}
+
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{MEDIA_URL}}{{image.url}}" alt="Second slide" style="object-fit: cover;">
+          </div>
+
+          {% endif %}
+
+
+        {% endfor%}
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -148,46 +149,6 @@
       </div><!-- /.container -->
 
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    <div class ="club-content">
-        <div class="club-photos">
-            <br>
-            {% if images %}
-    
-                <div class = "slider-wrap" >
-                    <div class = "slider">
-                        {% for image in images %}
-                            <div class = "img-div" >
-                                <img src = "{% static image.url %}" alt = 'image error'/> 
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <a class="prev-btn" onclick="plusSlides(-1)"><</a>
-                <a class="next-btn" onclick="plusSlides(1)">></a>
-                {% else %}
-            {% endif %}
-        {% for image in club.images.all %}
-
-            <img src = "{% static image.url %}" alt = 'image error'/>
-        {% endfor %}
-    </div>
-
-
-
 
         <div class="club-info">
             <h4>What to know about {{ club.name }}</h4>
