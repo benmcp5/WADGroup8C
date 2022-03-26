@@ -38,7 +38,7 @@ def about(request):
     return render(request, 'ClubScoutGlasgow/about.html')
 
 
-def user_login(request):  # copied from twd, maybe not compatible?
+def user_login(request):
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -60,7 +60,7 @@ def user_login(request):  # copied from twd, maybe not compatible?
         return render(request, 'ClubScoutGlasgow/login.html')
 
 
-def user_signup(request):  # copied from twd
+def user_signup(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
