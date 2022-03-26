@@ -7,9 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, staff_member_required
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
-import random, string
-import json
-import xmltodict
+from django.conf import settings
+import random, string, json, xmltodict, os
 
 
 # Create your views here.
@@ -142,6 +141,7 @@ def show_club(request, club_name_slug):
         #else:
          #   context_dict['menu'] = []
 
+        
         totalRating = 0
         counter = 0
         totalQueueTime = 0
@@ -190,6 +190,8 @@ def show_club(request, club_name_slug):
             club.averageStaffQuality = totalStaffQuality/(counter)
             club.save()
         context_dict['club'] = club
+
+        
     except Club.DoesNotExist:
         context_dict['club'] = None
     except Review.DoesNotExist:
@@ -232,7 +234,6 @@ def write_review(request, club_name_slug):
                 review.club = club
                 review.reviewer = UserProfile.objects.get(user=request.user)
                 review.reviewLikes = 0
-                review.reviewID = getReviewID(review.reviewer, review.club)
                 review.save()
 
                 review_list = Review.objects.filter(club = club)
@@ -254,28 +255,6 @@ def write_review(request, club_name_slug):
         print(form.errors)
     context_dict = {'form': form, 'club': club}
     return render(request, 'ClubScoutGlasgow/write_review.html', context=context_dict)
-
-
-
-
-
-def getReviewID(reviewer, club):
-    reviewID = ""
-    reviewer = str(reviewer.user.username)
-    club = club.name
-    if len(reviewer) >= 6:
-        reviewID += reviewer[:6]
-    else:
-        reviewID += reviewer + "%" * (6 - len(reviewer))
-
-    for i in range(10):
-        reviewID += random.choice(string.ascii_letters)
-
-    if len(club) >= 6:
-        reviewID += club[:6]
-    else:
-        reviewID += club + "%" * (6 - len(club))
-    return reviewID
 
 
 @staff_member_required

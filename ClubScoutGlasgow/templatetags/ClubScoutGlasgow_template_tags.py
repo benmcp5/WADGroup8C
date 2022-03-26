@@ -1,5 +1,8 @@
 from django import template
 from ClubScoutGlasgow.models import Club
+from django.conf import settings
+from django import template
+
 register=template.Library()
 
 @register.inclusion_tag('ClubScoutGlasgow/clubs.html')
@@ -15,3 +18,4 @@ def get_image_url(images):
         i+=1
 
     return urls
+

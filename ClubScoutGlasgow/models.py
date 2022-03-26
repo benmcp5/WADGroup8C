@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import validators
 import django.utils.timezone
+from django.conf import settings
 
+import uuid
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -50,16 +52,16 @@ Sunday:"""
 
 class ClubImage(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='static/images/ClubImages/')
+    image = models.ImageField(upload_to='images/ClubImages/')
     imageName = image.upload_to.split('/')
-    imageName = imageName[3]
+    imageName = imageName[2]
     url = models.CharField(max_length=500, default='images/ClubImages/' + str(imageName))
 
 
 class Review(models.Model):
     reviewer = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
-    reviewID = models.CharField(max_length=30, unique=True)
+    reviewID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reviewDate = models.DateField(default=django.utils.timezone.now())
 
     drinksPrice = models.IntegerField(default=1)
