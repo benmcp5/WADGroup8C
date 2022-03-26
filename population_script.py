@@ -127,8 +127,8 @@ def populate():
     }
 
     # Key is review ID
-    reviews = {
-        "001": {
+    reviews = [
+        {
             "reviewer": 1,
             "club": 4,
             "typeOfCrowd": "trendy",
@@ -139,7 +139,7 @@ def populate():
             "overallRating": 3,
             "additionalComments": "do not want",
         },
-        "002": {
+        {
             "reviewer": 7,
             "club": 4,
             "typeOfCrowd": "youthful",
@@ -150,7 +150,7 @@ def populate():
             "overallRating": 2,
             "additionalComments": "",
         },
-        "003": {
+        {
             "reviewer": 6,
             "club": 2,
             "typeOfCrowd": "the worst",
@@ -161,7 +161,7 @@ def populate():
             "overallRating": 1,
             "additionalComments": "",
         },
-        "004": {
+        {
             "reviewer": 6,
             "club": 1,
             "typeOfCrowd": "everyone",
@@ -172,7 +172,7 @@ def populate():
             "overallRating": 4,
             "additionalComments": "class",
         },
-    }
+    ]
 
     club_array = []
     for club in clubs:
@@ -186,13 +186,13 @@ def populate():
         user_array.append(u)
 
     for review in reviews:
-        club_id = club_array[reviews[review]["club"] - 1]
-        user_id = user_array[reviews[review]["reviewer"] - 1]
-        add_review(review, reviews[review], club_id, user_id)
+        club_id = club_array[review["club"] - 1]
+        user_id = user_array[review["reviewer"] - 1]
+        add_review(review, club_id, user_id)
 
 
-def add_review(id, data, club_id, user_id):
-    r = Review.objects.get_or_create(reviewID=id, club=club_id, reviewer=user_id)[0]
+def add_review(data, club_id, user_id):
+    r = Review.objects.get_or_create(club=club_id, reviewer=user_id)[0]
     r.typeOfCrowd = data["typeOfCrowd"]
     r.popularNight = data["popularNight"]
     r.avgQueueTime = data["avgQueueTime"]

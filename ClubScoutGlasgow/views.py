@@ -11,7 +11,6 @@ import random, string
 import json
 import xmltodict
 
-
 # Create your views here.
 
 def home(request):
@@ -207,7 +206,6 @@ def write_review(request, club_name_slug):
                 review.club = club
                 review.reviewer = UserProfile.objects.get(user=request.user)
                 review.reviewLikes = 0
-                review.reviewID = getReviewID(review.reviewer, review.club)
                 review.save()
 
                 review_list = Review.objects.filter(club = club)
