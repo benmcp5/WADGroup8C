@@ -144,19 +144,32 @@ def show_club(request, club_name_slug):
 
         totalRating = 0
         counter = 0
+        totalQueueTime = 0
+        totalDrinksPrice = 0
+        totalQualityOfSafety = 0
+        totalStaffQuality = 0
         if review_list:
 
             for review in review_list:
                 counter+=1
                 totalRating += review.overallRating
+                totalQueueTime += review.avgQueueTime
+                totalDrinksPrice += review.drinksPrice
+                totalQualityOfSafety += review.qualityOfSafety
+                totalStaffQuality += review.staffFriendliness
 
             club.averageOverallRating = totalRating/(counter)
+            club.averageQueueTime = totalQueueTime/(counter)
+            club.averageDrinksPrice = totalDrinksPrice/(counter)
+            club.averageQualityOfSafety = totalQualityOfSafety/(counter)
+            club.averageStaffQuality = totalStaffQuality/(counter)
             club.save()
         context_dict['club'] = club
     except Club.DoesNotExist:
         context_dict['club'] = None
     except Review.DoesNotExist:
          context_dict['reviews'] = None
+
 
 
     return render(request, 'ClubScoutGlasgow/club.html', context=context_dict)

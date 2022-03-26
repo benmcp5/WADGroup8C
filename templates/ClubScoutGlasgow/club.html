@@ -74,26 +74,42 @@
 
 
         <div class="club-info">
-            <h4>Table containing all info about club ie rating, price, queue times etc</h4>
+            <h4>What to know about {{ club.name }}</h4>
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Category</th>
-                  <th scope="col">Value</th>
+                  <th scope="col">What matters on a night out</th>
+                  <th scope="col">How {{ club.name }} is doing</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th>Average overall rating</th>
-                  <td>{{ club.averageOverallRating }}</td>
+                  <th>How many stars ClubScoutGlasgow reviewers give on average</th>
+                  <td>{{ club.averageOverallRating }} stars</td>
                 </tr>
                 <tr>
-                  <th>entry price</th>
-                  <td>{{ club.entryPrice }}</td>
+                  <th>Entry price</th>
+                  <td>{{ club.entryPrice }} £</td>
                 </tr>
                 <tr>
-                  <th>number of rooms</th>
+                  <th>Number of rooms</th>
                   <td colspan="2">{{ club.noOfRooms }}</td>
+                </tr>
+              <tr>
+                  <th>Average Time spent in Queue</th>
+                  <td colspan="2">{{ club.averageQueueTime }} minutes</td>
+                </tr>
+              <tr>
+                  <th>Drinks Prices on Average</th>
+                  <td colspan="2">{{ club.averageDrinksPrice }} £</td>
+                </tr>
+              <tr>
+                  <th>Quality of Safety</th>
+                  <td colspan="2">{{ club.averageQualityOfSafety }} stars</td>
+                </tr>
+              <tr>
+                  <th>Staff Friendliness</th>
+                  <td colspan="2">{{ club.averageStaffQuality }} stars</td>
                 </tr>
               </tbody>
             </table>
