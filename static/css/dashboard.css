@@ -161,7 +161,11 @@ body {
 
 
 
+.home-club-image {
+  height: 225px;
+  width: 1100px
 
+}
 
 .home-main {
   background-image: url("http://glasgowguardian.co.uk/wp-content/uploads/sites/2/2015/10/IMG_0312-1024x682.jpg");
