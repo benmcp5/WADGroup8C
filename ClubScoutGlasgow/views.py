@@ -232,28 +232,6 @@ def write_review(request, club_name_slug):
     return render(request, 'ClubScoutGlasgow/write_review.html', context=context_dict)
 
 
-
-
-
-def getReviewID(reviewer, club):
-    reviewID = ""
-    reviewer = str(reviewer.user.username)
-    club = club.name
-    if len(reviewer) >= 6:
-        reviewID += reviewer[:6]
-    else:
-        reviewID += reviewer + "%" * (6 - len(reviewer))
-
-    for i in range(10):
-        reviewID += random.choice(string.ascii_letters)
-
-    if len(club) >= 6:
-        reviewID += club[:6]
-    else:
-        reviewID += club + "%" * (6 - len(club))
-    return reviewID
-
-
 @staff_member_required
 def add_club(request):
     form = ClubForm()
