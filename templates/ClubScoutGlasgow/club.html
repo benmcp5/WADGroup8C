@@ -161,23 +161,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   
     <div class ="club-content">
         <div class="club-photos">
-            <h4>Photos of club</h4>
             <br>
             {% if images %}
     
@@ -193,18 +179,11 @@
                 <a class="prev-btn" onclick="plusSlides(-1)"><</a>
                 <a class="next-btn" onclick="plusSlides(1)">></a>
                 {% else %}
-                <img src="{% static 'images/ClubImages/hive/hive2.jpeg' %}" alt="png of sadness" />
             {% endif %}
-        <p>we are here</p>
         {% for image in club.images.all %}
 
             <img src = "{% static image.url %}" alt = 'image error'/>
         {% endfor %}
-
-        <br>
-        </div>
-    <div>
-        <br>
     </div>
 
 
