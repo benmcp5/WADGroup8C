@@ -69,7 +69,7 @@ class Review(models.Model):
     staffFriendliness = models.IntegerField(default=1)
     qualityOfSafety = models.IntegerField(default=1)
     overallRating = models.IntegerField(default=1)
-    additionalComments = models.CharField(max_length=1000)
+    additionalComments = models.CharField(max_length=1000, default = "")
     reviewLikes = models.IntegerField(default=0)
 
     def __str__(self):
