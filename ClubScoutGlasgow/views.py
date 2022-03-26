@@ -131,16 +131,16 @@ def show_club(request, club_name_slug):
         review_list = Review.objects.filter(club = club)
         context_dict['reviews'] = review_list
 
-        if bool(club.menu):
-            with open(club.menu.path) as xml_file:
-                data_dict = xmltodict.parse(xml_file.read())
-                xml_file.close()
-            print(data_dict["menu"]["drink"])
-            json_data = json.loads(json.dumps(data_dict["menu"]))
-            print(type(json_data))
-            context_dict["menus"] = json_data["drink"]
-        else:
-            context_dict['menu'] = []
+        #if bool(club.menu):
+         #   with open(club.menu.path) as xml_file:
+          #      data_dict = xmltodict.parse(xml_file.read())
+           #     xml_file.close()
+            #print(data_dict["menu"]["drink"])
+            #json_data = json.loads(json.dumps(data_dict["menu"]))
+            #print(type(json_data))
+            #context_dict["menus"] = json_data["drink"]
+        #else:
+         #   context_dict['menu'] = []
 
         totalRating = 0
         counter = 0
