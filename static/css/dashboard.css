@@ -115,7 +115,7 @@ body {
   position: relative;
   bottom: 0px;
   left: 0;
-  width: 200px;
+  width: 300px;
   height: 400px;
   border: 3px solid #1b1e21;
 }
@@ -124,7 +124,7 @@ body {
   position: relative;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 300px;
   height: 100px;
   border: 3px solid #1b1e21;
 
@@ -134,7 +134,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 800px;
+  width: 700px;
   height: 500px;
   border: 3px solid #1b1e21;
   z-index: 1;
