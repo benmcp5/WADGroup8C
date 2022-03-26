@@ -148,6 +148,7 @@ def populate():
             "staffFriendliness": 2,
             "qualityOfSafety": 2,
             "overallRating": 2,
+            "additionalComments": "",
         },
         "003": {
             "reviewer": 6,
@@ -158,6 +159,7 @@ def populate():
             "staffFriendliness": 1,
             "qualityOfSafety": 1,
             "overallRating": 1,
+            "additionalComments": "",
         },
         "004": {
             "reviewer": 6,
@@ -168,6 +170,7 @@ def populate():
             "staffFriendliness": 4,
             "qualityOfSafety": 3,
             "overallRating": 4,
+            "additionalComments": "class",
         },
     }
 
@@ -196,6 +199,7 @@ def add_review(id, data, club_id, user_id):
     r.staffFriendliness = data["staffFriendliness"]
     r.qualityOfSafety = data["qualityOfSafety"]
     r.overallRating = data["overallRating"]
+    r.additionalComments = data["additionalComments"]
     r.save()
     return r
 
