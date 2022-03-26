@@ -857,7 +857,7 @@
                                     <a href="#"><i class="icofont-ui-rating active"></i></a>
                                     <a href="#"><i class="icofont-ui-rating active"></i></a>
                                     <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                    <a href="#"><i class="icofont-ui-rating"></i></a> <b class="text-black ml-2">334</b>
+                                    <a href="#"><i class="icofont-ui-rating"></i></a> <b class="text-black ml-2"> {{ club.counter }} </b>
                                 </div>
                                 <p class="text-black mb-4 mt-2">Rated {{ club.averageOverallRating }} out of 5</p>
                             </div>
@@ -868,12 +868,12 @@
                                     </div>
                                     <div class="rating-list-center">
                                         <div class="progress">
-                                            <div style="width: 56%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <div style="width: {{ club.portionFiveStars }}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
                                                 <span class="sr-only">80% Complete (danger)</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="rating-list-right text-black">56%</div>
+                                    <div class="rating-list-right text-black">{{ club.portionFiveStars }}%</div>
                                 </div>
                                 <div class="rating-list">
                                     <div class="rating-list-left text-black">
@@ -881,12 +881,12 @@
                                     </div>
                                     <div class="rating-list-center">
                                         <div class="progress">
-                                            <div style="width: 23%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <div style="width: {{ club.portionFourStars }}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
                                                 <span class="sr-only">80% Complete (danger)</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="rating-list-right text-black">23%</div>
+                                    <div class="rating-list-right text-black">{{ club.portionFourStars }}%</div>
                                 </div>
                                 <div class="rating-list">
                                     <div class="rating-list-left text-black">
@@ -894,12 +894,12 @@
                                     </div>
                                     <div class="rating-list-center">
                                         <div class="progress">
-                                            <div style="width: 11%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <div style="width: {{ club.portionThreeStars }}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
                                                 <span class="sr-only">80% Complete (danger)</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="rating-list-right text-black">11%</div>
+                                    <div class="rating-list-right text-black">{{ club.portionThreeStars }}%</div>
                                 </div>
                                 <div class="rating-list">
                                     <div class="rating-list-left text-black">
@@ -907,21 +907,59 @@
                                     </div>
                                     <div class="rating-list-center">
                                         <div class="progress">
-                                            <div style="width: 2%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <div style="width: {{ club.portionTwoStars }}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
                                                 <span class="sr-only">80% Complete (danger)</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="rating-list-right text-black">02%</div>
+                                    <div class="rating-list-right text-black">{{ club.portionTwoStars }}%</div>
                                 </div>
+                                <div class="rating-list">
+                                    <div class="rating-list-left text-black">
+                                        1 Star
+                                    </div>
+                                    <div class="rating-list-center">
+                                        <div class="progress">
+                                            <div style="width: {{ club.portionOneStars }}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                                <span class="sr-only">80% Complete (danger)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="rating-list-right text-black">{{ club.portionOneStars }}%</div>
+                                </div>
+
                             </div>
+
+
+
+
                             <div class="graph-star-rating-footer text-center mt-3 mb-3">
-                                <button type="button" class="btn btn-outline-primary btn-sm">Rate and Review</button>
+                                <div class="club-leave-review">
+                                    {% if user.is_authenticated %}
+                                        {% if club %}
+                                          <a class="btn btn-outline-primary btn-sm" href = "{% url 'ClubScoutGlasgow:write_review' club.slug %}"> Write a review for {{ club.name }}</a>
+                                        {% else %}
+                                          The specified club does not exist.
+                                        {% endif %}
+                                    {% else %}
+                                        <a class="btn btn-outline-primary btn-sm" href = "{% url 'ClubScoutGlasgow:login' %}"> Log in to write a review for {{ club.name }}</a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                         <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
-                            <a href="#" class="btn btn-outline-primary btn-sm float-right">Top Rated</a>
+                            <button type="button" class="btn btn-outline-primary btn-sm float-right">Top Rated</button>
                             <h5 class="mb-1">All Ratings and Reviews</h5>
+
+
+
+
+
+
+
+                            {% for review in reviews %}
+
+
                             <div class="reviews-members pt-4 pb-4">
                                 <div class="media">
 
@@ -934,48 +972,58 @@
                                                   <a href="#"><i class="icofont-ui-rating active"></i></a>
                                                   <a href="#"><i class="icofont-ui-rating"></i></a>
                                                   </span>
-                                            <h6 class="mb-1"><a class="text-black" href="#">Singh Osahan</a></h6>
-                                            <p class="text-gray">Tue, 20 Mar 2020</p>
+                                            <h6 class="mb-1"><a class="text-black" href="#">{{ review.reviewer }}, {{ review.reviewer.age}} years old</a></h6>
+                                            <p class="text-gray"> {{ review.reviewDate }} </p>
                                         </div>
+                                        <strong> Overall Rating: </strong>
+                                        <div id = "{{ review.reviewID }}stars"></div>
+
+                                        <script type = "text/javascript">
+                                            var counter = "{{ review.overallRating }}";
+                                            var id = "{{ review.reviewID }}stars";
+                                            var stars = document.getElementById(id);
+                                            var star=[5];
+                                            for(let i = 0; i < 5;i++){
+                                                star[i] = document.createElement("span");
+                                                if(i<counter){
+                                                    star[i].className = 'fa fa-star checked';
+                                                }else{
+                                                    star[i].className = 'fa fa-star';
+                                                }
+                                                stars.appendChild(star[i]);
+                                            }
+
+                                        </script>
                                         <div class="reviews-members-body">
-                                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections </p>
+                                            <p>{{ review.additionalComments }}</p>
                                         </div>
                                         <div class="reviews-members-footer">
-                                            <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 856M</a> <a class="total-like" href="#"><i class="icofont-thumbs-down"></i> 158K</a>
+                                            <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 32 Likes</a>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <div class="reviews-members pt-4 pb-4">
-                                <div class="media">
 
-                                    <div class="media-body">
-                                        <div class="reviews-members-header">
-                                            <span class="star-rating float-right">
-                                                  <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                                  <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                                  <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                                  <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                                  <a href="#"><i class="icofont-ui-rating"></i></a>
-                                                  </span>
-                                            <h6 class="mb-1"><a class="text-black" href="#">Gurdeep Singh</a></h6>
-                                            <p class="text-gray">Tue, 20 Mar 2020</p>
-                                        </div>
-                                        <div class="reviews-members-body">
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                                        </div>
-                                        <div class="reviews-members-footer">
-                                            <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 88K</a> <a class="total-like" href="#"><i class="icofont-thumbs-down"></i> 1K</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <hr>
-                            <a class="text-center w-100 d-block mt-4 font-weight-bold" href="#">See All Reviews</a>
                         </div>
+
+                    {% endfor%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
                             <h5 class="mb-4">Leave Comment</h5>
                             <p class="mb-2">Rate the Place</p>
@@ -1005,44 +1053,13 @@
         </div>
 
 
-
         <style>
             .checked {
               color: orange;
             }
             </style>
 
-        <h4>Top Reviews for {{ club.name }}</h4>
-        <!-- Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes -->
-            {% for review in reviews %}
 
-                <strong> User: </strong>{{ review.reviewer }}<br>
-                <strong> Age: </strong>{{ review.reviewer.age}}<br>
-                <strong> Overall Rating: </strong> 
-                <div id = "{{ review.reviewID }}stars"></div>
-
-                <script type = "text/javascript">
-                    var counter = "{{ review.overallRating }}";
-                    var id = "{{ review.reviewID }}stars";
-                    var stars = document.getElementById(id);
-                    var star=[5];
-                    for(let i = 0; i < 5;i++){
-                        star[i] = document.createElement("span");
-                        if(i<counter){
-                            star[i].className = 'fa fa-star checked';
-                        }else{
-                            star[i].className = 'fa fa-star';
-                        }
-                        stars.appendChild(star[i]);
-                    }
-
-                </script>
-                <strong> Comments: </strong>
-                <br>                
-                {{ review.additionalComments }}
-             <hr>
-            {% endfor %}
-        </div>
 
         <div class="club-leave-review">
             {% if user.is_authenticated %}

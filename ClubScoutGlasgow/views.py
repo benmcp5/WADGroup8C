@@ -148,15 +148,40 @@ def show_club(request, club_name_slug):
         totalDrinksPrice = 0
         totalQualityOfSafety = 0
         totalStaffQuality = 0
-        if review_list:
 
+        totalFiveStars = 0
+        totalFourStars = 0
+        totalThreeStars = 0
+        totalTwoStars = 0
+        totalOneStars = 0
+
+
+        if review_list:
             for review in review_list:
                 counter+=1
                 totalRating += review.overallRating
+                if totalRating == 5:
+                    totalFiveStars += 1
+                if totalRating == 4:
+                    totalFourStars += 1
+                if totalRating == 3:
+                    totalThreeStars += 1
+                if totalRating == 2:
+                    totalTwoStars += 1
+                if totalRating == 1:
+                    totalOneStars += 1
+
                 totalQueueTime += review.avgQueueTime
                 totalDrinksPrice += review.drinksPrice
                 totalQualityOfSafety += review.qualityOfSafety
                 totalStaffQuality += review.staffFriendliness
+
+            club.portionFiveStars = totalFiveStars/(counter) *100
+            club.portionFourStars = totalFourStars/(counter) *100
+            club.portionThreeStars = totalThreeStars/(counter) *100
+            club.portionTwoStars = totalTwoStars/(counter) *100
+            club.portionOneStars = totalOneStars/(counter) *100
+            club.counter = counter
 
             club.averageOverallRating = totalRating/(counter)
             club.averageQueueTime = totalQueueTime/(counter)
