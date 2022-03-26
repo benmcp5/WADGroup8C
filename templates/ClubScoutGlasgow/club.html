@@ -12,14 +12,194 @@
 
 
 {% block body_block %}
+
+    <link href="{%  static 'css/carousel.css'%}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="WnfP1Jl3"></script>
     <link href="{%  static 'css/club.css'%}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src = "{% static 'javascript/CSG.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+
+    <h1 class="display-4 fw-normal"> {{ club.name }}</h1>
+    <br>
+    <main>
+
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+            <div class="container">
+              <div class="carousel-caption text-start">
+                <h1>Example headline.</h1>
+                <p>Some representative placeholder content for the first slide of the carousel.</p>
+                <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>Another example headline.</h1>
+                <p>Some representative placeholder content for the second slide of the carousel.</p>
+                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+            <div class="container">
+              <div class="carousel-caption text-end">
+                <h1>One more for good measure.</h1>
+                <p>Some representative placeholder content for the third slide of this carousel.</p>
+                <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing">
+
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">{{ club.name }}<span class="text-muted"> on social media</span></h2>
+            <p class="lead">Check out their embedded Facebook page on the right, or visit their instagram by clicking the instagram icon below.
+                <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:84px;height:auto;"></a></div>
+            </p>
+
+          </div>
+          <div class="col-md-5">
+            <div class="fb-page" data-href="{{ club.facebook }}" data-tabs="timeline" data-width="500" data-height="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="{{ club.facebook }}" class="fb-xfbml-parse-ignore">
+                    <a href="{{ club.facebook }}">{{ club.name }}</a>
+                </blockquote>
+            </div>
+
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">About the club, <span class="text-muted">and the opening hours to the left</span></h2>
+            <p class="lead">
+                <strong>Address</strong>
+            {{ club.location }}
+            <br>
+            {{ club.about }}
+              </p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">{{ club.openingHours }}</text></svg>
+
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">The {{ club.name }} location <span class="text-muted">on Google Maps</span></h2>
+            <p class="lead">The Google Maps element is interactive, use the plus and minus buttons to zoom in and out, or click "Directions" to be redirected to the Google Maps site.</p>
+          </div>
+          <div class="col-md-5">
+            <iframe src= {{ club.mapSrc }} width="500" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
     <div class ="club-content">
-        <h1>{{ club.name }}</h1>
         <div class="club-photos">
             <h4>Photos of club</h4>
             <br>
@@ -39,38 +219,14 @@
                 {% else %}
                 <img src="{% static 'images/ClubImages/hive2.jpeg' %}" alt="png of sadness" />
             {% endif %}
+
         <br>
         </div>
-    <div> <br></div>
+    <div>
+        <br>
+    </div>
 
-        <div class="club-combodiv">
 
-        <div class="club-about">
-            <h4>About the club</h4>
-            <strong>Address</strong>
-            {{ club.location }}
-            <br>
-            <p></p>
-            {{ club.about }}
-        </div>
-
-        <div class="club-opening-hours">
-            <h4>Opening times</h4>
-            <p>Opening hours:</p>
-            {{ club.openingHours }}
-        </div>
-
-        <div class="club-social-media">
-            <h4>Social media handles</h4>
-            <div class="fb-page" data-href="{{ club.facebook }}" data-tabs="timeline" data-width="650" data-height="450" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <blockquote cite="{{ club.facebook }}" class="fb-xfbml-parse-ignore">
-                    <a href="{{ club.facebook }}">{{ club.name }}</a>
-                </blockquote>
-            </div>
-            <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="position: absolute;top: 50px;right: 50px;width:84px;height:auto;"></a></div>
-        </div>
-
-        </div>
 
 
         <div class="club-info">
@@ -113,12 +269,6 @@
                 </tr>
               </tbody>
             </table>
-        </div>
-
-        <div class="club-map">
-            <h4>{{ club.name }} on Google Maps</h4>
-            <iframe src= {{ club.mapSrc }} width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            
         </div>
 
         <div class="club-reviews">
@@ -168,10 +318,12 @@
                   The specified club does not exist.
                 {% endif %}
             {% else %}
-                <a href = "{% url 'ClubScoutGlasgow:signup' %}"> Sign up to write a review for {{ club.name }}</a>
+                <a href = "{% url 'ClubScoutGlasgow:login' %}"> Log in to write a review for {{ club.name }}</a>
             {% endif %}
         </div>
     </div>
+
+
 
 
 
