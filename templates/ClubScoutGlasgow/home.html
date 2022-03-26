@@ -13,9 +13,7 @@
 
 
 
-    <!--new from bootstrap-->
     <main>
-
       <section class="py-5 text-center container">
           <div class="home-main">
               <div class="main">
@@ -62,16 +60,16 @@
 
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
             <div class="col">
               <div class="card shadow-sm">
-
                     <img style="height: auto;width: 1100px" src= "{% static 'images/ClubImages/subclub1.jpg' %}" alt="ERROR">
                     <rect width="100%" height="100%" fill="#55595c"></rect>
                 </svg>
                 <div class="card-body">
-                    {{ club.name }}
-                    <p class="card-text"><strong> Average Rating: </strong> {{ club.averageOverallRating }} </p>
+                    <strong>  {{ club.name }} </strong>
+                    <p class="card-text"> Average Rating:  {{ club.averageOverallRating }}
+                    </p>
+
                     <p class="card-text">{{ club.about }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">

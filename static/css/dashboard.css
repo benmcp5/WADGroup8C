@@ -108,7 +108,7 @@ body {
 .club-combodiv {
   position: relative;
   width: 1000px;
-  height: 1000px;
+  height: 600px;
 }
 
 .club-about{
@@ -117,16 +117,16 @@ body {
   left: 0;
   width: 200px;
   height: 400px;
-  border: 3px solid #73AD21;
+  border: 3px solid #1b1e21;
 }
 
 .club-opening-hours{
   position: relative;
-  top: 0px;
+  top: 0;
   left: 0;
   width: 200px;
   height: 100px;
-  border: 3px solid #73AD21;
+  border: 3px solid #1b1e21;
 
 }
 
@@ -134,9 +134,9 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 500px;
+  width: 800px;
   height: 500px;
-  border: 3px solid #73AD21;
+  border: 3px solid #1b1e21;
   z-index: 1;
 
 }
@@ -151,6 +151,11 @@ body {
    */
   width: 1000px;
   right: 5px;
+}
+
+.club-map {
+  margin: auto;
+  width: 99%;
 }
 
 

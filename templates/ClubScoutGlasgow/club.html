@@ -39,14 +39,18 @@
                 {% else %}
                 <img src="{% static 'images/ClubImages/hive2.jpeg' %}" alt="png of sadness" />
             {% endif %}
+        <br>
         </div>
+    <div> <br></div>
 
         <div class="club-combodiv">
 
         <div class="club-about">
-            <h4>About the club, location, type of music etc</h4>
-            <p>Address</p>
+            <h4>About the club</h4>
+            <strong>Address</strong>
             {{ club.location }}
+            <br>
+            <p></p>
             {{ club.about }}
         </div>
 
@@ -58,32 +62,45 @@
 
         <div class="club-social-media">
             <h4>Social media handles</h4>
-            <div class="fb-page" data-href="{{ club.facebook }}" data-tabs="timeline" data-width="" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <div class="fb-page" data-href="{{ club.facebook }}" data-tabs="timeline" data-width="650" data-height="450" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                 <blockquote cite="{{ club.facebook }}" class="fb-xfbml-parse-ignore">
                     <a href="{{ club.facebook }}">{{ club.name }}</a>
                 </blockquote>
             </div>
-            <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="width:42px;height:42px;"></a></div>
+            <div><a href="{{ club.instagram }}"><img src="{% static 'images/instagram-icon.png' %}" alt="instagram link" style="position: absolute;top: 50px;right: 50px;width:84px;height:auto;"></a></div>
         </div>
 
         </div>
-
-
-
 
 
         <div class="club-info">
             <h4>Table containing all info about club ie rating, price, queue times etc</h4>
-            <p>Average overall rating</p>
-            {{ club.averageOverallRating }}
-            <p>entry price</p>
-            {{ club.entryPrice }}
-            <p>number of rooms</p>
-            {{ club.noOfRooms }}
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Average overall rating</th>
+                  <td>{{ club.averageOverallRating }}</td>
+                </tr>
+                <tr>
+                  <th>entry price</th>
+                  <td>{{ club.entryPrice }}</td>
+                </tr>
+                <tr>
+                  <th>number of rooms</th>
+                  <td colspan="2">{{ club.noOfRooms }}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
 
         <div class="club-map">
-            <h4>Map displaying location of club</h4>
+            <h4>{{ club.name }} on Google Maps</h4>
             <iframe src= {{ club.mapSrc }} width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             
         </div>
@@ -95,7 +112,8 @@
             }
             </style>
 
-        <h4>Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes</h4>
+        <h4>Top Reviews for {{ club.name }}</h4>
+        <!-- Reviews left about club, username/age of reviewer, their comment and rating, reviews can be liked and reviews are sorted by most likes -->
             {% for review in reviews %}
 
                 <strong> User: </strong>{{ review.reviewer }}<br>
@@ -119,7 +137,6 @@
                     }
 
                 </script>
-                <br>
                 <strong> Comments: </strong>
                 <br>                
                 {{ review.additionalComments }}
