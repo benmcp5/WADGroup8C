@@ -114,15 +114,15 @@ def populate():
                      "community of over 120 artists and musicians.",
         },
         "Firewater" : {
-            "location": "100 Eastvale Pl, Stobcross Rd, Glasgow G3 8QG",
-            "openingHours": "10:00-18:00",
-            "website": "https://swg3.tv/",
-            "instagram": "https://www.instagram.com/swg3glasgow/",
-            "facebook": "https://www.facebook.com/SWG3glasgow/",
+            "location": "341 Sauchiehall St, Glasgow G2 3HW",
+            "openingHours": "19:00-03:00",
+            "website": "https://www.facebook.com/firewaterglasgowofficial",
+            "instagram": "https://www.instagram.com/firewater_glasgow/?hl=en",
+            "facebook": "https://www.facebook.com/firewaterglasgowofficial",
             "mapSrc": "https://maps.google.com/maps?q=firewater&t=&z=13&ie=UTF8&iwloc=&output=embed",
-            "about": "SWG3 (Studio Warehouse Glasgow) is a multi-disciplinary arts space in the westend of Glasgow. "
-                     "We run an annual programme of exhibitions, band nights and events as well as being home to a "
-                     "community of over 120 artists and musicians.",
+            "about": "Firewater offers Funk, Punk Rock’n’Roll and Disco in two rooms, under one roof"
+                     " since 2001. Famed for legendary rock'n'roll-indie club nights and hosting huge"
+                     " after-show parties.",
         }
     }
 
