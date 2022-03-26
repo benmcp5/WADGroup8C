@@ -6,12 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import validators
 import django.utils.timezone
-<<<<<<< HEAD
 from django.conf import settings
 
-=======
 import uuid
->>>>>>> d706a19468097ad8af0b796025251800b9d291ff
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
