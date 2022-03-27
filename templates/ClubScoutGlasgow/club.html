@@ -935,7 +935,7 @@
                                             <p class="text-gray"> {{ review.reviewDate }} </p>
                                         </div>
                                         <strong> Overall Rating: </strong>
-                                        <div id = "{{ review.reviewID }}stars"></div>
+                                        <div id = "{{ review.reviewID }}stars" onload = "outputStars(this, rating);"></div>
 
                                         <script type = "text/javascript">
                                             var counter = "{{ review.overallRating }}";
