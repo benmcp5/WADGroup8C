@@ -16,7 +16,7 @@ class UserProfileForm(forms.ModelForm):
     age = forms.IntegerField(validators =[validators.MinValueValidator(18)])
     class Meta:
         model = UserProfile
-        fields = ('age', 'email')
+        fields = ('age',)
 
 
 class ClubForm(forms.ModelForm):
