@@ -120,7 +120,6 @@ body {
   border: 3px solid #1b1e21;
 }
 
-.home-club-image
 
 .club-opening-hours{
   position: relative;
@@ -413,5 +412,8 @@ body {
     height: 30px;
 }
 
+.d-block w-100{
+  object-fit: cover;
+}
 
 

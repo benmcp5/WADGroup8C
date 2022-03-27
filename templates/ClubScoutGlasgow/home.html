@@ -61,7 +61,7 @@
             <div class="col">
               <div class="card shadow-sm" >
                   {%if club.images.all%}
-                  <img class = 'home-club-image'  src= "{{MEDIA_URL}}{{club.images.all.0.url}}" alt="image cannot be displayed">
+                  <img class = 'home-club-image' src= "{{MEDIA_URL}}{{club.images.all.0.url}}" alt="image cannot be displayed">
 
                   {%endif%}
                     <rect width="100%" height="100%" fill="#55595c"></rect>
@@ -79,12 +79,10 @@
                             <a href="{% url 'ClubScoutGlasgow:write_review' club.slug %}" class="btn btn-sm btn-outline-primary">Leave a review for {{ club.name }}</a>
                             {% endif %}
                         </div>
-                    <small class="text-muted">10 days</small>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 

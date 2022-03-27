@@ -537,12 +537,13 @@ class PopulationScriptTests(TestCase):
         self.assertTrue('Sub Club' in clubs_strs, f"{FAILURE_HEADER}The club 'Sub Club' was expected but not created by population_script.{FAILURE_FOOTER}")
     
     def test_Reviews(self):
-        """
-        Tests to check whether each page for the three different clubs exists in the database.
-        Calls the helper check_club_pages() method for this.
-        """
+  
         reviews = Review.objects.filter()
         reviews_len = len(reviews)
         
-        self.assertEqual(reviews_len, 4, f"{FAILURE_HEADER}Expecting 5 clubs to be created from the population_script module; found {reviews_len}.{FAILURE_FOOTER}")
+        self.assertEqual(reviews_len, 4, f"{FAILURE_HEADER}Expecting 4 reviews to be created from the population_script module; found {reviews_len}.{FAILURE_FOOTER}")
   
+
+class ClubMethodTests(TestCase):
+
+    def test_ensure_
