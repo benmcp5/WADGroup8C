@@ -170,7 +170,7 @@ body {
   background-image: url("http://glasgowguardian.co.uk/wp-content/uploads/sites/2/2015/10/IMG_0312-1024x682.jpg");
   background-color: #cccccc;
   width: 100%;
-  height: 350px;
+  height: auto;
 }
 
 .main {
