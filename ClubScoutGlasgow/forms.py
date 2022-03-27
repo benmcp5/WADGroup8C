@@ -16,7 +16,7 @@ class UserProfileForm(forms.ModelForm):
     age = forms.IntegerField(validators =[validators.MinValueValidator(18)])
     class Meta:
         model = UserProfile
-        fields = ('age',)
+        fields = ('age', 'email')
 
 
 class ClubForm(forms.ModelForm):
@@ -40,8 +40,7 @@ class ClubForm(forms.ModelForm):
     class Meta:
     # Provide an association
         model = Club
-        fields = ('name',)
-
+        exclude = ('slug',)
 
 class ReviewForm(forms.ModelForm):
 

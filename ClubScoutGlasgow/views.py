@@ -277,11 +277,11 @@ def add_club(request):
         form = ClubForm(request.POST)
         # Have we been provided with a valid form?
         if form.is_valid():
-            # Save the new category to the database.
-            form.save(commit=True)
-
-            # Now that the category is saved, we could confirm this. # For now, just redirect the user back to the index view.
-            return redirect('/ClubScoutGlasgow/')
+            # Save the new club to the database.
+             club = form.save(commit=False)
+             club.save()
+            # Now that the Club is saved, we could confirm this. # For now, just redirect the user back to the index view.
+             return redirect('/ClubScoutGlasgow/')
     else:
         # The supplied form contained errors -
         # just print them to the terminal.
