@@ -525,8 +525,7 @@ class PopulationScriptTests(TestCase):
         population_script.populate()
     
     def test_clubs(self):
-        """
-        """
+
         clubs = Club.objects.filter()
         clubs_len = len(clubs)
         clubs_strs = map(str, clubs)
@@ -544,6 +543,13 @@ class PopulationScriptTests(TestCase):
         self.assertEqual(reviews_len, 4, f"{FAILURE_HEADER}Expecting 4 reviews to be created from the population_script module; found {reviews_len}.{FAILURE_FOOTER}")
   
 
-class ClubMethodTests(TestCase):
+class ClubsPageTests(TestCase):
 
-    def test_ensure_
+    def test_ensure_clubs_appear_on_clubs_page(self):
+        response = self.client.get('/ClubScoutGlasgow/clubs/')
+        self.assertTrue('<h4><a href ="/ClubScoutGlasgow/club/firewater>Firewater</a></h4>' in response_body, f"{FAILURE_HEADER}The Firewatercould not be found in the clubs Page{FAILURE_FOOTER}")
+        self.assertTrue('<h4><a href ="/ClubScoutGlasgow/club/hive>hive</a></h4>' in response_body, f"{FAILURE_HEADER}The Hive could not be found in the clubs Page{FAILURE_FOOTER}")
+        self.assertTrue('<h4><a href ="/ClubScoutGlasgow/club/swg3>SWG3</a></h4>' in response_body, f"{FAILURE_HEADER}The SWG3 could not be found in the clubs Page{FAILURE_FOOTER}")
+        self.assertTrue('<h4><a href ="/ClubScoutGlasgow/club/sub-club>Sub Club</a></h4>' in response_body, f"{FAILURE_HEADER}The Sub Club could not be found in the clubs Page{FAILURE_FOOTER}")
+        self.assertTrue('<h4><a href ="/ClubScoutGlasgow/club/the-garage>The Garage</a></h4>' in response_body, f"{FAILURE_HEADER}The The Garage could not be found in the clubs Page{FAILURE_FOOTER}")
+

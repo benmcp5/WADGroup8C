@@ -1,5 +1,3 @@
-
-
 function outputStars(div, rating){
   var stars = div
   var star=[5];
