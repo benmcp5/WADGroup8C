@@ -18,11 +18,22 @@ def home(request):
     clubs = Club.objects.order_by('-averageOverallRating')[:5]  # to be replaced
     context_dict['clubs'] = clubs
     image_list =[]
+    if clubs:
+        for club in clubs:
+            image_list.append(club.images)
+            review_list = Review.objects.filter(club = club)
+            counter = 0
+            totalRating = 0
+            if review_list:
+                for review in review_list:
+                    counter+=1
+                    totalRating += review.overallRating
 
-    for club in clubs:
-        image_list.append(club.images)
-    context_dict['images'] = image_list
+                club.averageOverallRating = totalRating/(counter)
+                club.save()
 
+        context_dict['images'] = image_list
+        
 
     # MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
     '''
@@ -239,6 +250,7 @@ def write_review(request, club_name_slug):
                 review_list = Review.objects.filter(club = club)
                 totalRating = 0
                 counter = 0
+
                 if review_list:
 
                     for review in review_list:
