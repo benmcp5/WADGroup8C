@@ -46,11 +46,16 @@
     <main>
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
+      {% for image in images%}
+        {% if forloop.first %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
+        {% else %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}"></li>
+        {% endif %}
+      {% endfor%}
+    </ol>
       <div class="carousel-inner">
         
         {% for image in images %}
@@ -58,6 +63,7 @@
           <div class="carousel-item active">
             <img class="d-block w-100" src= "{{MEDIA_URL}}{{image.url}}" alt="First slide" style="object-fit: cover;">
           </div>
+          
           {% else %}
 
           <div class="carousel-item">

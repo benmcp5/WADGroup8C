@@ -4,7 +4,7 @@ from ClubScoutGlasgow.models import UserProfile, Club, ClubImage, Review
 
 class ClubImageInline(admin.TabularInline):
     model = ClubImage
-
+    extra = 1
 
 class ClubAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
