@@ -16,7 +16,7 @@
         <a href="{% url 'ClubScoutGlasgow:show_club' club.slug %}">{{ club.name }}</a>
       </h4>
 
-          <strong> Average Rating: </strong> {{ club.averageOverallRating }}
+          <strong> Average Rating: </strong> {{ club.averageOverallRating | floatformat:"1"}}
 
       <br>
 

@@ -68,7 +68,7 @@
                 </svg>
                 <div class="card-body">
                     <strong>  {{ club.name }} </strong>
-                    <p class="card-text"> Average Rating:  {{ club.averageOverallRating }}
+                    <p class="card-text"> Average Rating:  {{ club.averageOverallRating | floatformat:"1" }}
                     </p>
 
                     <p class="card-text">{{ club.about }}</p>
