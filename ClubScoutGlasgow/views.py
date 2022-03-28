@@ -200,11 +200,11 @@ def show_club(request, club_name_slug):
             club.portionOneStars = round(totalOneStars/(counter) *100,1)
             club.counter = counter
 
-            club.averageOverallRating = round(totalRating/(counter))
-            club.averageQueueTime = round(totalQueueTime/(counter))
-            club.averageDrinksPrice = round(totalDrinksPrice/(counter))
-            club.averageQualityOfSafety = round(totalQualityOfSafety/(counter))
-            club.averageStaffQuality = round(totalStaffQuality/(counter))
+            club.averageOverallRating = round(totalRating/(counter), 1)
+            club.averageQueueTime = round(totalQueueTime/(counter) ,1)
+            club.averageDrinksPrice = round(totalDrinksPrice/(counter), 1)
+            club.averageQualityOfSafety = round(totalQualityOfSafety/(counter), 1)
+            club.averageStaffQuality = round(totalStaffQuality/(counter), 1)
             club.save()
         context_dict['club'] = club
 
