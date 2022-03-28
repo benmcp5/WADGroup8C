@@ -11,7 +11,6 @@ from ClubScoutGlasgow.models import Club, Review, UserProfile
 
 
 def populate():
-
     """
     templates
 
@@ -61,22 +60,23 @@ def populate():
 
     # Key is name of club
     clubs = {
-        "Sub Club" : {
-            "EntryPrice":8,
-            "location" : "22 Jamaica Street",
-            "openingHours" : "23:00-3:00",
-            "website" : "https://subclub.co.uk/",
-            "instagram" : "https://www.instagram.com/subclub87/",
-            "facebook" : "https://www.facebook.com/subclub",
+        "Sub Club": {
+            "EntryPrice": 8,
+            "location": "22 Jamaica Street",
+            "openingHours": "23:00-3:00",
+            "website": "https://subclub.co.uk/",
+            "instagram": "https://www.instagram.com/subclub87/",
+            "facebook": "https://www.facebook.com/subclub",
             "mapSrc": "https://maps.google.com/maps?q=Sub%20Club&t=&z=13&ie=UTF8&iwloc=&output=embed",
-            "about" : "The Sub Club is a club and music venue located at 22 Jamaica Street in Glasgow, Scotland."
-                      " It opened 1 April 1987 and is the longest running underground dance club in the world."
-                      " The 3,500-square-foot (330 m2) basement space can legally hold up to 410 people."
-                      " In 2008 it was voted the 10th best club in the world by Resident Advisor (and 5th "
-                      "for atmosphere) and the 30th best club in the world by DJ Mag. In 2009 the club was placed"
-                      " 14th best in the world by DJ Mag.",
+            "about": "The Sub Club is a club and music venue located at 22 Jamaica Street in Glasgow, Scotland."
+                     " It opened 1 April 1987 and is the longest running underground dance club in the world."
+                     " The 3,500-square-foot (330 m2) basement space can legally hold up to 410 people."
+                     " In 2008 it was voted the 10th best club in the world by Resident Advisor (and 5th "
+                     "for atmosphere) and the 30th best club in the world by DJ Mag. In 2009 the club was placed"
+                     " 14th best in the world by DJ Mag.",
         },
-        "The Garage" : {
+        "The Garage": {
+            "EntryPrice": 4,
             "location": "490 Sauchiehall St",
             "openingHours": "23:00-3:00",
             "website": "https://garageglasgow.co.uk/",
@@ -92,7 +92,8 @@ def populate():
                      "and nostalgia while the final room The Attic plays indie and rock. There is also a shot and "
                      "cocktail bar at the back of Desperados bar. ",
         },
-        "Nice \'N\' Sleazy" : {
+        "Nice \'N\' Sleazy": {
+            "EntryPrice": 7,
             "location": "421 Sauchiehall St, Glasgow G2 3LG",
             "openingHours": "18:00-3:00",
             "website": "https://www.nicensleazy.com/",
@@ -102,7 +103,8 @@ def populate():
             "about": "Buzzing bar with poster plastered walls and small capacity creating atmospheric musical "
                      "intimacy.",
         },
-        "SWG3" : {
+        "SWG3": {
+            "EntryPrice": 16.50,
             "location": "100 Eastvale Pl, Stobcross Rd, Glasgow G3 8QG",
             "openingHours": "10:00-18:00",
             "website": "https://swg3.tv/",
@@ -113,7 +115,8 @@ def populate():
                      "We run an annual programme of exhibitions, band nights and events as well as being home to a "
                      "community of over 120 artists and musicians.",
         },
-        "Firewater" : {
+        "Firewater": {
+            "EntryPrice": 6,
             "location": "341 Sauchiehall St, Glasgow G2 3HW",
             "openingHours": "19:00-03:00",
             "website": "https://www.facebook.com/firewaterglasgowofficial",
