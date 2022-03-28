@@ -22,25 +22,11 @@ def home(request):
         for club in clubs:
             image_list.append(club.images)
             review_list = Review.objects.filter(club = club)
-            counter = 0
-            totalRating = 0
-            if review_list:
-                for review in review_list:
-                    counter+=1
-                    totalRating += review.overallRating
-
-                club.averageOverallRating = totalRating/(counter)
-                club.save()
+            calc_average_rating(club)
 
         context_dict['images'] = image_list
-        
 
-    # MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
-    '''
-        # hive = Club.objects.get(name = 'Hive')
-        # image_list = hive.images.all()
-        # context_dict['images'] = image_list
-        '''
+
     return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
 
 
@@ -129,6 +115,20 @@ def clubs(request):  # yet to add sorting options?
         context_dict['clubs'] = None
     return render(request, 'ClubScoutGlasgow/clubs.html',
                   context=context_dict)  # note clubs.html for whole list template, not club.html for individual
+
+def calc_average_rating(club):
+    review_list = Review.objects.filter(club = club)
+    totalRating = 0
+    counter = 0
+
+    if review_list:
+
+        for review in review_list:
+            counter+=1
+            totalRating += review.overallRating
+
+        club.averageOverallRating = totalRating/(counter)
+        club.save()
 
 
 def show_club(request, club_name_slug):
@@ -247,19 +247,7 @@ def write_review(request, club_name_slug):
                 review.reviewLikes = 0
                 review.save()
 
-                review_list = Review.objects.filter(club = club)
-                totalRating = 0
-                counter = 0
-
-                if review_list:
-
-                    for review in review_list:
-                        counter+=1
-                        totalRating += review.overallRating
-
-                    club.averageOverallRating = totalRating/(counter)
-                    club.save()
-                    
+                rcalc_average_rating(club)
                 
                 return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
