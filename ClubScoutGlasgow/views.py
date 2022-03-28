@@ -9,6 +9,7 @@ from ClubScoutGlasgow.models import UserProfile, Club, Review, login_required, s
 from ClubScoutGlasgow.forms import UserForm, UserProfileForm, ClubForm, ReviewForm
 from django.conf import settings
 import random, string, json, xmltodict, os
+from math import log10, floor
 
 
 # Create your views here.
@@ -152,6 +153,11 @@ def show_club(request, club_name_slug):
         #else:
          #   context_dict['menu'] = []
 
+
+
+        def round_to_1(x):
+            return round(x, -int(floor(log10(abs(x)))))
+
         
         totalRating = 0
         counter = 0
@@ -187,11 +193,11 @@ def show_club(request, club_name_slug):
                 totalQualityOfSafety += review.qualityOfSafety
                 totalStaffQuality += review.staffFriendliness
 
-            club.portionFiveStars = totalFiveStars/(counter) *100
-            club.portionFourStars = totalFourStars/(counter) *100
-            club.portionThreeStars = totalThreeStars/(counter) *100
-            club.portionTwoStars = totalTwoStars/(counter) *100
-            club.portionOneStars = totalOneStars/(counter) *100
+            club.portionFiveStars = round(totalFiveStars/(counter) *100, 1)
+            club.portionFourStars = round(totalFourStars/(counter) *100, 1)
+            club.portionThreeStars = round(totalThreeStars/(counter) *100, 1)
+            club.portionTwoStars = round(totalTwoStars/(counter) *100, 1)
+            club.portionOneStars = round(totalOneStars/(counter) *100,1)
             club.counter = counter
 
             club.averageOverallRating = totalRating/(counter)
