@@ -13,7 +13,7 @@
 
     <main>
       <section class="py-5 text-center container">
-          <div class="home-main">
+          <div class="home-main" style ='width:100%;height:400px;'>
               <div class="main">
                   <div class="module">
                     <header class="home-main-header">
@@ -61,7 +61,7 @@
             <div class="col">
               <div class="card shadow-sm" >
                   {%if club.images.all%}
-                  <img class = 'home-club-image' src= "{{MEDIA_URL}}{{club.images.all.0.url}}" alt="image cannot be displayed">
+                  <img class = "home-club-image" style ='height:auto;width:100%;' src= "{{MEDIA_URL}}{{club.images.all.0.url}}" alt="image cannot be displayed">
 
                   {%endif%}
                     <rect width="100%" height="100%" fill="#55595c"></rect>

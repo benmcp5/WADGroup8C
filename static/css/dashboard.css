@@ -168,7 +168,11 @@ body {
 .home-main {
   background-image: url("http://glasgowguardian.co.uk/wp-content/uploads/sites/2/2015/10/IMG_0312-1024x682.jpg");
   background-color: #cccccc;
+<<<<<<< HEAD
+  width:100%;
+=======
   width: 100%;
+>>>>>>> 7c9dadffaed897cec684fc35820b2013a6f8f806
   height: auto;
 }
 
