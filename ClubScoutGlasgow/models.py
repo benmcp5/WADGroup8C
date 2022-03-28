@@ -75,4 +75,4 @@ class Review(models.Model):
     reviewLikes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.reviewID
+        return str(self.reviewID)

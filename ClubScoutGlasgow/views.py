@@ -245,10 +245,7 @@ def write_review(request, club_name_slug):
                 review.club = club
                 review.reviewer = UserProfile.objects.get(user=request.user)
                 review.reviewLikes = 0
-                review.save()
-
-                rcalc_average_rating(club)
-                
+                review.save()                
                 return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
     else:
