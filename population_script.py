@@ -140,7 +140,7 @@ def populate():
             "staffFriendliness": 1,
             "qualityOfSafety": 4,
             "overallRating": 3,
-            "additionalComments": "do not want",
+            "additionalComments": "decent enough club, bouncer has a stick up his ass though",
         },
         {
             "reviewer": 7,

@@ -171,15 +171,15 @@ def show_club(request, club_name_slug):
             for review in review_list:
                 counter+=1
                 totalRating += review.overallRating
-                if totalRating == 5:
+                if review.overallRating == 5:
                     totalFiveStars += 1
-                if totalRating == 4:
+                if review.overallRating == 4:
                     totalFourStars += 1
-                if totalRating == 3:
+                if review.overallRating == 3:
                     totalThreeStars += 1
-                if totalRating == 2:
+                if review.overallRating == 2:
                     totalTwoStars += 1
-                if totalRating == 1:
+                if review.overallRating == 1:
                     totalOneStars += 1
 
                 totalQueueTime += review.avgQueueTime
