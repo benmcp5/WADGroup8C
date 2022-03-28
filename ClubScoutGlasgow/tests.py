@@ -484,9 +484,9 @@ class AdminInterfaceTests(TestCase):
         response_body = response.content.decode()
                 
         # Check each model is present.
-        self.assertTrue('Club' in response_body, f"{FAILURE_HEADER}The club model was not found in the admin interface. If you did add the model to admin.py, did you add the correct plural spelling (clubs)?{FAILURE_FOOTER}")
-        self.assertTrue('Review' in response_body, f"{FAILURE_HEADER}The Review model was not found in the admin interface. If you did add the model to admin.py, did you add the correct plural spelling (Pages)?{FAILURE_FOOTER}")
-        self.assertTrue('User profiles' in response_body, f"{FAILURE_HEADER}The UserProfile model was not found in the admin interface. If you did add the model to admin.py, did you add the correct plural spelling (Pages)?{FAILURE_FOOTER}")
+        self.assertTrue('Club' in response_body, f"{FAILURE_HEADER}The club model was not found in the admin interface.{FAILURE_FOOTER}")
+        self.assertTrue('Review' in response_body, f"{FAILURE_HEADER}The Review model was not found in the admin interface. {FAILURE_FOOTER}")
+        self.assertTrue('User profiles' in response_body, f"{FAILURE_HEADER}The UserProfile model was not found in the admin interface.{FAILURE_FOOTER}")
 
     def test_Review_display_changes(self):
         """
@@ -496,10 +496,10 @@ class AdminInterfaceTests(TestCase):
         response_body = response.content.decode()
         
         # Headers -- are they all present?
-        self.assertTrue('<div class="text"><a href="?o=1">ReviewID</a></div>' in response_body, f"{FAILURE_HEADER}The 'reviewID' column could not be found in the admin interface for the Page model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
-        self.assertTrue('<div class="text"><a href="?o=2">Reviewer</a></div>' in response_body, f"{FAILURE_HEADER}The 'club' column could not be found in the admin interface for the Page model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
-        self.assertTrue('<div class="text"><a href="?o=3">Club</a></div>' in response_body, f"{FAILURE_HEADER}The 'Url' (stylised that way!) column could not be found in the admin interface for the Page model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
-        self.assertTrue('<div class="text"><a href="?o=4">ReviewDate</a></div>' in response_body, f"{FAILURE_HEADER}The 'Url' (stylised that way!) column could not be found in the admin interface for the Page model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
+        self.assertTrue('<div class="text"><a href="?o=1">ReviewID</a></div>' in response_body, f"{FAILURE_HEADER}The 'reviewID' column could not be found in the admin interface for the Review model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
+        self.assertTrue('<div class="text"><a href="?o=2">Reviewer</a></div>' in response_body, f"{FAILURE_HEADER}The 'club' column could not be found in the admin interface for the Review model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
+        self.assertTrue('<div class="text"><a href="?o=3">Club</a></div>' in response_body, f"{FAILURE_HEADER}The 'Url' (stylised that way!) column could not be found in the admin interface for the Review model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
+        self.assertTrue('<div class="text"><a href="?o=4">ReviewDate</a></div>' in response_body, f"{FAILURE_HEADER}The 'Url' (stylised that way!) column could not be found in the admin interface for the Review model -- if it is present, is it in the correct order?{FAILURE_FOOTER}")
 
     
 
