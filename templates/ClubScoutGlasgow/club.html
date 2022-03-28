@@ -11,7 +11,6 @@
   {% endif %}
 {% endblock %}
 
-
 {% block body_block %}
 
     <link href="{%  static 'css/carousel.css'%}" rel="stylesheet">
@@ -45,9 +44,7 @@
     <h1 class="display-4 fw-normal"> {{ club.name }}</h1>
     <br>
     <main>
-
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
       <ol class="carousel-indicators">
       {% for image in images%}
         {% if forloop.first %}
@@ -72,8 +69,6 @@
           </div>
 
           {% endif %}
-
-
         {% endfor%}
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -92,13 +87,9 @@
       <!-- Wrap the rest of the page in another container to center all the content. -->
 
       <div class="container marketing">
-
-
-
         <!-- START THE FEATURETTES -->
 
         <hr class="featurette-divider">
-
         <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading">{{ club.name }}<span class="text-muted"> on social media</span></h2>
@@ -356,9 +347,6 @@
                                         </script>
                                         <div class="reviews-members-body">
                                             <p>{{ review.additionalComments }}</p>
-                                        </div>
-                                        <div class="reviews-members-footer">
-                                            <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 0 Likes</a>
                                         </div>
                                     </div>
                                   
