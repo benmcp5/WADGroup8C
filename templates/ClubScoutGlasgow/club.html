@@ -59,7 +59,7 @@
         {% for image in images %}
           {% if forloop.counter == 1 %}
           <div class="carousel-item active">
-            <img class="d-block w-100" src= "{{MEDIA_URL}}{{image.url}}" alt="First slide">
+            <img class="d-block w-100" style ="width: 1000px;height: auto;object-fit: cover" src= "{{MEDIA_URL}}{{image.url}}" alt="First slide">
           </div>
           
           {% else %}
