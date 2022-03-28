@@ -139,7 +139,8 @@ def show_club(request, club_name_slug):
         
         image_list = club.images.all()
         context_dict['images'] = image_list
-        review_list = Review.objects.filter(club = club).order_by()
+        review_list = Review.objects.filter(club = club)
+        #review_list = Review.objects.order_by('-reviewDate')[:]
         context_dict['reviews'] = review_list
 
         #if bool(club.menu):
