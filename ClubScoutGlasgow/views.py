@@ -154,12 +154,6 @@ def show_club(request, club_name_slug):
         #else:
          #   context_dict['menu'] = []
 
-
-
-        def round_to_1(x):
-            return round(x, -int(floor(log10(abs(x)))))
-
-        
         totalRating = 0
         counter = 0
         totalQueueTime = 0
