@@ -120,6 +120,7 @@ body {
   border: 3px solid #1b1e21;
 }
 
+
 .club-opening-hours{
   position: relative;
   top: 0;
@@ -158,25 +159,17 @@ body {
   width: 99%;
 }
 
-
-
-
-
-
-
-
-
 .home-club-image {
-  height: 225px;
-  width: 1100px
+  height: auto;
+  width: 100%;
 
 }
 
 .home-main {
   background-image: url("http://glasgowguardian.co.uk/wp-content/uploads/sites/2/2015/10/IMG_0312-1024x682.jpg");
   background-color: #cccccc;
-  width: 1024px;
-  height: 350px;
+  width: 100%;
+  height: auto;
 }
 
 .main {
@@ -236,35 +229,6 @@ body {
 .top-padding {
   padding-top: 25px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -448,5 +412,8 @@ body {
     height: 30px;
 }
 
+.d-block w-100{
+  object-fit: cover;
+}
 
 

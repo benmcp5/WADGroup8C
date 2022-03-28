@@ -35,13 +35,12 @@ class ClubForm(forms.ModelForm):
     facebook = forms.URLField(required=True, help_text="Facebook")
     mapSrc = forms.URLField(required=True, help_text="Map Source code")
     about = forms.CharField(required=True,max_length=1000, widget=forms.Textarea(attrs={'rows': 6, 'cols': 40}), help_text="About this club" )
-
+    
     # An inline class to provide
     class Meta:
     # Provide an association
         model = Club
-        fields = ('name',)
-
+        exclude = ('slug',)
 
 class ReviewForm(forms.ModelForm):
 

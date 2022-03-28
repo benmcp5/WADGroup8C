@@ -18,18 +18,15 @@ def home(request):
     clubs = Club.objects.order_by('-averageOverallRating')[:5]  # to be replaced
     context_dict['clubs'] = clubs
     image_list =[]
+    if clubs:
+        for club in clubs:
+            image_list.append(club.images)
+            review_list = Review.objects.filter(club = club)
+            calc_average_rating(club)
 
-    for club in clubs:
-        image_list.append(club.images)
-    context_dict['images'] = image_list
+        context_dict['images'] = image_list
 
 
-    # MOVE INTO CLUB PAGE- CHANGE TO NAME = club.name
-    '''
-        # hive = Club.objects.get(name = 'Hive')
-        # image_list = hive.images.all()
-        # context_dict['images'] = image_list
-        '''
     return render(request, 'ClubScoutGlasgow/home.html', context=context_dict)
 
 
@@ -118,6 +115,20 @@ def clubs(request):  # yet to add sorting options?
         context_dict['clubs'] = None
     return render(request, 'ClubScoutGlasgow/clubs.html',
                   context=context_dict)  # note clubs.html for whole list template, not club.html for individual
+
+def calc_average_rating(club):
+    review_list = Review.objects.filter(club = club)
+    totalRating = 0
+    counter = 0
+
+    if review_list:
+
+        for review in review_list:
+            counter+=1
+            totalRating += review.overallRating
+
+        club.averageOverallRating = totalRating/(counter)
+        club.save()
 
 
 def show_club(request, club_name_slug):
@@ -236,18 +247,7 @@ def write_review(request, club_name_slug):
                 review.reviewLikes = 0
                 review.save()
 
-                review_list = Review.objects.filter(club = club)
-                totalRating = 0
-                counter = 0
-                if review_list:
-
-                    for review in review_list:
-                        counter+=1
-                        totalRating += review.overallRating
-
-                    club.averageOverallRating = totalRating/(counter)
-                    club.save()
-                    
+                rcalc_average_rating(club)
                 
                 return redirect(reverse('ClubScoutGlasgow:show_club', kwargs={'club_name_slug': club_name_slug}))
 
@@ -265,11 +265,11 @@ def add_club(request):
         form = ClubForm(request.POST)
         # Have we been provided with a valid form?
         if form.is_valid():
-            # Save the new category to the database.
-            form.save(commit=True)
-
-            # Now that the category is saved, we could confirm this. # For now, just redirect the user back to the index view.
-            return redirect('/ClubScoutGlasgow/')
+            # Save the new club to the database.
+             club = form.save(commit=False)
+             club.save()
+            # Now that the Club is saved, we could confirm this. # For now, just redirect the user back to the index view.
+             return redirect('/ClubScoutGlasgow/')
     else:
         # The supplied form contained errors -
         # just print them to the terminal.
